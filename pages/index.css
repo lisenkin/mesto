@@ -37,3 +37,11 @@
 /* footer */
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__author/footer__author.css);
+
+
+/*  popup */
+@import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/__overlay/popup__overlay.css);
+@import url(../blocks/popup/__content/popup__content.css);
+@import url(../blocks/popup/__close-button/popup__close-button.css);
+@import url(../blocks/popup/_visible/popup_visible.css);
