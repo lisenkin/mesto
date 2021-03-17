@@ -4,7 +4,5 @@
 
 ###  js hlml css
 
-Alt-H1
 
-https://lisenkin.github.io/mesto/
 
