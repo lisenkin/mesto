@@ -45,3 +45,11 @@
 @import url(../blocks/popup/__content/popup__content.css);
 @import url(../blocks/popup/__close-button/popup__close-button.css);
 @import url(../blocks/popup/_visible/popup_visible.css);
+
+/* form popup edit*/
+@import url(../blocks/popup/__title/popup__title.css);
+@import url(../blocks/popup/__form/popup__form.css);
+@import url(../blocks/popup/__input-name/popup__input-name.css);
+@import url(../blocks/popup/__input-status/popup__input-status.css);
+@import url(../blocks/popup/__button-submit/popup__button-submit.css);
+      

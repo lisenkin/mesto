@@ -1,16 +1,17 @@
-.page__footer{
+.page__footer {
     margin: 67px 200px 60px 200px;
-    padding:0;
+    padding: 0;
 }
 
 @media screen and (max-width: 1023px) {
-    .page__footer{
+    .page__footer {
         margin: 67px 50px 60px 50px;
-        padding:0;
+        padding: 0;
     }
-  }
+}
+
 @media screen and (max-width: 767px) {
-    .page__footer{
+    .page__footer {
         margin: 48px 19px 36px 19px;
     }
 }
