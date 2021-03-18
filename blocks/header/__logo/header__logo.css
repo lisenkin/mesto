@@ -11,3 +11,10 @@
     }
 }
 
+.header__logo:hover{
+  background: black;
+  visibility: hidden;
+  /*background-image: url('../../../images/Vector\ black.svg');*/
+  /*немного не понятно по макету, зачем нужен черный логотип на черном фоне*/
+}
+
