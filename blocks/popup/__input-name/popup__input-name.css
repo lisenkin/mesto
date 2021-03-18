@@ -1,12 +1,12 @@
 .popup__input-name {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: normal;
-  font-size: 14px;
-  line-height: 17px;
-  border: 0;
-  border-bottom: 1px solid rgb(0, 0, 0, .2);
-  box-sizing: border-box;
-  outline: none;
+
   padding: 0 0 13px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .popup__input-name {
+
+    margin-top: 75px;
+  }
+
 }
