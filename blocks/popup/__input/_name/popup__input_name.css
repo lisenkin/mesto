@@ -1,10 +1,10 @@
-.popup__input-name {
+.popup__input_name {
 
   padding: 0 0 13px 0;
 }
 
 @media screen and (max-width: 767px) {
-  .popup__input-name {
+  .popup__input_name {
 
     margin-top: 75px;
   }

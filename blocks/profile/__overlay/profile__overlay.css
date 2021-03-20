@@ -1,0 +1,12 @@
+.profile__overlay{
+  margin: 0 30px 0 0;
+
+  height: 120px;
+  min-width: 120px;
+}
+
+@media screen and (max-width: 767px) {
+  .profile__overlay{
+    margin: 38px 0 0 0;
+}
+}

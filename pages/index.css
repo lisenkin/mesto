@@ -15,6 +15,7 @@
 
 
 @import url(../blocks/profile/profile.css);
+@import url(../blocks/profile/__overlay/profile__overlay.css);
 @import url(../blocks/profile/__avatar/profile__avatar.css);
 @import url(../blocks/profile/__info/profile__info.css);
 @import url(../blocks/profile/__info-textblock/profile__info-textblock.css);
@@ -26,7 +27,6 @@
 /* place */
 @import url(../blocks/places/places.css);
 @import url(../blocks/place/place.css);
-@import url(../blocks/place/__rectangle/place__rectangle.css);
 @import url(../blocks/place/__photo/place__photo.css);
 @import url(../blocks/place/__textarea/place__textarea.css);
 @import url(../blocks/place/__text/place__text.css);
@@ -51,6 +51,6 @@
 @import url(../blocks/popup/__title/popup__title.css);
 @import url(../blocks/popup/__form/popup__form.css);
 @import url(../blocks/popup/__input/popup__input.css);
-@import url(../blocks/popup/__input-name/popup__input-name.css);
-@import url(../blocks/popup/__input-status/popup__input-status.css);
+@import url(../blocks/popup/__input/_name/popup__input_name.css);
+@import url(../blocks/popup/__input/_status/popup__input_status.css);
 @import url(../blocks/popup/__button-submit/popup__button-submit.css);
