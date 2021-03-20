@@ -8,5 +8,7 @@
 @media screen and (max-width: 767px) {
   .profile__info-textblock{
      margin-top: 22px;
+     align-items: center;
+     margin: 0 auto;
   }
 }
