@@ -1,8 +1,8 @@
 .popup__content {
   /*добавила центрирование через флекс*/
-  position: relative;
+  position: fixed;
   display: flex;
-  margin: auto;
+  margin: 50% auto;
   flex-direction: column;
   width: 430px;
   height: 330px;
