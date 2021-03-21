@@ -1,25 +1,22 @@
 .popup__content {
   /*добавила центрирование через флекс*/
-   position: relative;
-    display: flex;
-    margin: 15% auto;
-    flex-direction: column;
-    width: 430px;
-    height: 330px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
-    border-radius: 10px;
-    box-sizing: border-box;
-    z-index: 5;
+  position: relative;
+  display: flex;
+  margin: auto;
+  flex-direction: column;
+  width: 430px;
+  height: 330px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+  border-radius: 10px;
+  box-sizing: border-box;
+  z-index: 5;
 }
 
 @media screen and (max-width: 767px) {
-    .popup__content {
-        margin: 50% auto;
-        width: 282px;
-        height: 322px;
-
-
-
-    }
+  .popup__content {
+    margin: 50% auto;
+    width: 282px;
+    height: 322px;
+  }
 }

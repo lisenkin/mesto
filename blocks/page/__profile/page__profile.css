@@ -6,13 +6,13 @@
 @media screen and (max-width: 1023px) {
     .page__profile {
         margin: 0 75px 0 75px;
-        padding: 0;
+       
     }
 }
 
 @media screen and (max-width: 767px) {
     .page__profile {
         margin: 0 19px 0 19px;
-        padding: 0;
+
     }
 }

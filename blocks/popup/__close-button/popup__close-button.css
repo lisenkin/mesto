@@ -1,6 +1,6 @@
 .popup__close-button {
   /* переделала с + на картинку */
-  background: transparent url('../../../images/Close\ Icon.svg') center no-repeat;;
+  background: transparent url('../../../images/Close_Icon.svg') center no-repeat;;
   transform: rotate(45deg);
   position: absolute;
   cursor: pointer;
@@ -19,7 +19,7 @@
 
 @media screen and (max-width: 767px) {
   .popup__close-button {
-    background-image: url('../../../images/Close\ Icon\ small.svg');
+    background-image: url('../../../images/Close_Icon_small.svg');
     height: 26px;
     position: absolute;
     transform: rotate(-90deg);
