@@ -2,7 +2,7 @@
 const popup = document.querySelector('.popup');
 const openPopupBtn = document.getElementById('open_popup_btn');
 const closePopupBtn = document.querySelector('.popup__close-button');
-const popupOverlay = document.querySelector('.popup__overlay');
+
 
 
 //получим с профиля данные
@@ -43,7 +43,7 @@ openPopupBtn.addEventListener('click', openPopup);
 
 
 closePopupBtn.addEventListener('click', closePopup);
-popupOverlay.addEventListener('click', closePopup);
+
 
 
 

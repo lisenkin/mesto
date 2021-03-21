@@ -1,21 +1,12 @@
 .header__logo {
-    max-width: 142px;
-    margin: 45px 0 41px 0;
-    padding: 0;
+  max-width: 142px;
+  margin: 45px 0 41px 0;
+  padding: 0;
 }
 
 @media screen and (max-width: 767px) {
-    .header__logo {
-        margin: 28px 0 27px 27px;
-        max-width: 104px;
-       
-    }
+  .header__logo {
+    margin: 28px 0 27px 27px;
+    max-width: 104px;
+  }
 }
-
-.header__logo:hover{
-  background: black;
-  visibility: hidden;
-  /*background-image: url('../../../images/Vector\ black.svg');*/
-  /*немного не понятно по макету, зачем нужен черный логотип на черном фоне*/
-}
-
