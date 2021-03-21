@@ -12,41 +12,38 @@ let profileStatus = document.querySelector('.profile__status');
 //для отладки
 //console.log(profileName.value);
 
- // Находим форму в DOM
+// Находим форму в DOM
 let formElement = document.querySelector('.popup__form');
 
 //считаем что в форме
-let nameInput = document.querySelector('.popup__input-name');
-let jobInput = document.querySelector('.popup__input-status');
+let nameInput = document.querySelector('.popup__input_name');
+let jobInput = document.querySelector('.popup__input_status');
 
 //для отладки
 //console.log(nameInput.value);
 //console.log(jobInput.value);
 
-// считаем в поля что в форме данные из сайта
-function toForm(){
-  nameInput.setAttribute(profileName.textContent.value);
-  jobInput.setAttribute(profileDescription.textContent.value);
-  }
+
 
 // по клику открыть попап (добавить класс)
-function openPopup(){
-    popup.classList.add('popup_visible');
-    toForm(); //тут попробуем так
+function openPopup() {
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileStatus.textContent;
+  popup.classList.add('popup_visible');
+
 }
 
 //по клику закрыть попап (убрать класс)
 // по клику на оверлей закрыть попап
-function closePopup(){
-    popup.classList.remove('popup_visible');
+function closePopup() {
+  popup.classList.remove('popup_visible');
 }
 
-openPopupBtn.addEventListener('click' ,function(){
-    openPopup();
-});
+openPopupBtn.addEventListener('click', openPopup);
 
- closePopupBtn.addEventListener('click', function() {closePopup(); });
- popupOverlay.addEventListener('click', function() {closePopup(); });
+
+closePopupBtn.addEventListener('click', closePopup);
+popupOverlay.addEventListener('click', closePopup);
 
 
 
@@ -54,13 +51,13 @@ openPopupBtn.addEventListener('click' ,function(){
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
 
-function formSubmitHandler (evt) {
-    evt.preventDefault();
+function formSubmitHandler(evt) {
+  evt.preventDefault();
 
-    // Получите значение полей jobInput и nameInput из свойства value
-    profileName.textContent = nameInput.value;
-    profileStatus.textContent = jobInput.value;
-    closePopup();  //закроем
+  // Получите значение полей jobInput и nameInput из свойства value
+  profileName.textContent = nameInput.value;
+  profileStatus.textContent = jobInput.value;
+  closePopup();  //закроем
 
 
 }
