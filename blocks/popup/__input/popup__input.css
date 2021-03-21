@@ -10,6 +10,12 @@
   width: 358px;
 }
 
+/* теперь при фокусе зелененькая черта */
+.popup__input:focus {
+  outline: none;
+  border-bottom: 1px solid rgb(138, 219, 158);
+}
+
 @media screen and (max-width: 767px) {
   .popup__input {
     max-width: 238px;

@@ -1,3 +1,4 @@
 .footer{
     max-width: 938px;
+    flex-shrink: 0;
 }
