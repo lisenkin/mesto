@@ -32,64 +32,74 @@
       <button aria-label="добавить" class="profile__button-add" type="button"></button>
     </section>
     <section class="page__places places">
-      <article class="place">
+      <ul class="places__list">
+        <li class="places__item">
+          <article class="place">
 
-        <img src="./images/baltica.jpg" alt="балтика" class="place__photo" />
-        <div class="place__textarea">
-          <h2 class="place__text"> Балтика </h2>
-          <button aria-label="нравится" class="place__like" type="button"></button>
-        </div>
+            <img src="./images/baltica.jpg" alt="балтика" class="place__photo" />
+            <div class="place__textarea">
+              <h2 class="place__text"> Балтика </h2>
+              <button aria-label="нравится" class="place__like" type="button"></button>
+            </div>
 
-      </article>
+          </article>
+        </li>
+        <li class="places__item">
+          <article class="place">
 
-      <article class="place">
+            <img src="./images/sochi.jpg" alt="сочи" class="place__photo" />
+            <div class="place__textarea">
+              <h2 class="place__text"> сочи </h2>
+              <button aria-label="нравится" class="place__like" type="button"></button>
+            </div>
 
-        <img src="./images/sochi.jpg" alt="сочи" class="place__photo" />
-        <div class="place__textarea">
-          <h2 class="place__text"> сочи </h2>
-          <button aria-label="нравится" class="place__like" type="button"></button>
-        </div>
+          </article>
+        </li>
+        <li class="places__item">
+          <article class="place">
 
-      </article>
+            <img src="./images/karelia_les.jpg" alt="лес" class="place__photo" />
+            <div class="place__textarea">
+              <h2 class="place__text"> карельский лес</h2>
+              <button aria-label="нравится" class="place__like" type="button"></button>
+            </div>
 
-      <article class="place">
+          </article>
+        </li>
+        <li class="places__item">
+          <article class="place">
 
-        <img src="./images/karelia_les.jpg" alt="лес" class="place__photo" />
-        <div class="place__textarea">
-          <h2 class="place__text"> карельский лес</h2>
-          <button aria-label="нравится" class="place__like" type="button"></button>
-        </div>
+            <img src="./images/kosa.jpg" alt="коса" class="place__photo" />
+            <div class="place__textarea">
+              <h2 class="place__text"> коса </h2>
+              <button aria-label="нравится" class="place__like" type="button"></button>
+            </div>
 
-      </article>
+          </article>
+        </li>
+        <li class="places__item">
+          <article class="place">
 
-      <article class="place">
+            <img src="./images/polyana.jpg" alt="поляна" class="place__photo" />
+            <div class="place__textarea">
+              <h2 class="place__text"> красная поляна </h2>
+              <button aria-label="нравится" class="place__like" type="button"></button>
+            </div>
 
-        <img src="./images/kosa.jpg" alt="коса" class="place__photo" />
-        <div class="place__textarea">
-          <h2 class="place__text"> коса </h2>
-          <button aria-label="нравится" class="place__like" type="button"></button>
-        </div>
+          </article>
+        </li>
+        <li class="places__item">
+          <article class="place">
 
-      </article>
+            <img src="./images/ruskeala.jpg" alt="рускеала" class="place__photo" />
+            <div class="place__textarea">
+              <h2 class="place__text"> рускеала </h2>
+              <button aria-label="нравится" class="place__like" type="button"></button>
+            </div>
 
-      <article class="place">
-
-        <img src="./images/polyana.jpg" alt="поляна" class="place__photo" />
-        <div class="place__textarea">
-          <h2 class="place__text"> красная поляна </h2>
-          <button  aria-label="нравится" class="place__like" type="button"></button>
-        </div>
-
-      </article>
-      <article class="place">
-
-        <img src="./images/ruskeala.jpg" alt="рускеала" class="place__photo" />
-        <div class="place__textarea">
-          <h2 class="place__text"> рускеала </h2>
-          <button aria-label="нравится" class="place__like" type="button"></button>
-        </div>
-
-      </article>
+          </article>
+        </li>
+      </ul>
     </section>
 
 
@@ -101,19 +111,19 @@
   <div class="popup">
 
     <div class="popup__content">
-      <div class="popup__container">
-        <button aria-label="Закрыть" class="popup__close-button" type="button"></button>
-        <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="popup-form" id="popup-form-edit">
-          <input class="popup__input popup__input_name" type="text" placeholder="Жак Ив Кусто" name="popup-input-name"
-            required>
-          <input class="popup__input popup__input_status" type="text" placeholder="Исследователь океана"
-            name="popup-input-status" required>
-          <button class="popup__button-submit" type="submit">Сохранить</button>
-        </form>
-      </div>
+
+      <button aria-label="Закрыть" class="popup__close-button" type="button"></button>
+      <h2 class="popup__title">Редактировать профиль</h2>
+      <form class="popup__form" name="popup-form" id="popup-form-edit">
+        <input class="popup__input popup__input_type_name" type="text" placeholder="ваше имя" name="popup-input-name"
+          required>
+        <input class="popup__input popup__input_type_status" type="text" placeholder="о себе" name="popup-input-status"
+          required>
+        <button class="popup__button-submit" type="submit">Сохранить</button>
+      </form>
     </div>
   </div>
+
 
   <script src="script/index.js"></script>
 </body>

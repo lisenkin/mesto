@@ -16,8 +16,8 @@ let profileStatus = document.querySelector('.profile__status');
 let formElement = document.querySelector('.popup__form');
 
 //считаем что в форме
-let nameInput = document.querySelector('.popup__input_name');
-let jobInput = document.querySelector('.popup__input_status');
+let nameInput = document.querySelector('.popup__input_type_name');
+let jobInput = document.querySelector('.popup__input_type_status');
 
 //для отладки
 //console.log(nameInput.value);

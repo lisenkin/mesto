@@ -1,7 +1,6 @@
 .popup__close-button {
   /* переделала с + на картинку */
   background: transparent url('../../../images/Close_Icon.svg') center no-repeat;
-  transform: rotate(45deg);
   position: absolute;
   cursor: pointer;
   outline-style: none;
@@ -21,7 +20,6 @@
   .popup__close-button {
     background-image: url('../../../images/Close_Icon_small.svg');
     height: 26px;
-    position: absolute;
     transform: rotate(-90deg);
     right: -15px;
     top: -45px;

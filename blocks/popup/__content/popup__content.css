@@ -1,8 +1,9 @@
 .popup__content {
   /*добавила центрирование через флекс*/
-  position: fixed;
   display: flex;
+  position: relative;
   margin: 50% auto;
+  padding: 34px 36px 37px 36px;
   flex-direction: column;
   width: 430px;
   background: #FFFFFF;
@@ -14,8 +15,8 @@
 
 @media screen and (max-width: 767px) {
   .popup__content {
-    margin: 50% auto;
+    padding: 25px 22px;
     width: 282px;
-    height: 322px;
+
   }
 }

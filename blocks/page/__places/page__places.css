@@ -1,18 +1,22 @@
 .page__places {
-    margin: 47px auto 0 auto;
+    margin: 36px auto 0 auto;
     padding: 0;
 }
 
-@media screen and (max-width: 1023px) {
+
+@media screen and (max-width: 767px) {
   .page__places  {
-    row-gap: 40px;
-    padding: 0 75px;
+    margin-top: 40px;
+    padding: 0 auto;
   }
 }
 
-@media screen and (max-width: 767px) {
+@media screen and (max-width: 320 px) {
   .page__places {
-    margin: 47px 19px 0 19px;
+    margin: 47px 0 0 0 ;
     padding: 0;
 }
 }
+
+
+
