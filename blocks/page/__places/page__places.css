@@ -7,14 +7,13 @@
 @media screen and (max-width: 767px) {
   .page__places  {
     margin-top: 40px;
-    padding: 0 auto;
   }
 }
 
 @media screen and (max-width: 320 px) {
   .page__places {
     margin: 47px 0 0 0 ;
-    padding: 0;
+    
 }
 }
 
