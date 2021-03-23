@@ -19,7 +19,8 @@
 
 @media screen and (max-width: 767px) {
   .profile__status {
-    margin: 0;
+    /* для статуса по центру на мелких разрешениях*/
+    margin: 0 auto;
     text-align: center;
   }
 }
