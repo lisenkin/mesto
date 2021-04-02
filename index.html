@@ -29,76 +29,10 @@
         </div>
         <p class="profile__status">исследователь океана</p>
       </div>
-      <button aria-label="добавить" class="profile__button-add" type="button"></button>
+      <button aria-label="добавить" class="profile__button-add" type="button" id="open_popup_btn_add"></button>
     </section>
     <section class="page__places places">
       <ul class="places__list">
-        <li class="places__item">
-          <article class="place">
-
-            <img src="./images/baltica.jpg" alt="балтика" class="place__photo" />
-            <div class="place__textarea">
-              <h2 class="place__text"> Балтика </h2>
-              <button aria-label="нравится" class="place__like" type="button"></button>
-            </div>
-
-          </article>
-        </li>
-        <li class="places__item">
-          <article class="place">
-
-            <img src="./images/sochi.jpg" alt="сочи" class="place__photo" />
-            <div class="place__textarea">
-              <h2 class="place__text"> сочи </h2>
-              <button aria-label="нравится" class="place__like" type="button"></button>
-            </div>
-
-          </article>
-        </li>
-        <li class="places__item">
-          <article class="place">
-
-            <img src="./images/karelia_les.jpg" alt="лес" class="place__photo" />
-            <div class="place__textarea">
-              <h2 class="place__text"> карельский лес</h2>
-              <button aria-label="нравится" class="place__like" type="button"></button>
-            </div>
-
-          </article>
-        </li>
-        <li class="places__item">
-          <article class="place">
-
-            <img src="./images/kosa.jpg" alt="коса" class="place__photo" />
-            <div class="place__textarea">
-              <h2 class="place__text"> коса </h2>
-              <button aria-label="нравится" class="place__like" type="button"></button>
-            </div>
-
-          </article>
-        </li>
-        <li class="places__item">
-          <article class="place">
-
-            <img src="./images/polyana.jpg" alt="поляна" class="place__photo" />
-            <div class="place__textarea">
-              <h2 class="place__text"> красная поляна </h2>
-              <button aria-label="нравится" class="place__like" type="button"></button>
-            </div>
-
-          </article>
-        </li>
-        <li class="places__item">
-          <article class="place">
-
-            <img src="./images/ruskeala.jpg" alt="рускеала" class="place__photo" />
-            <div class="place__textarea">
-              <h2 class="place__text"> рускеала </h2>
-              <button aria-label="нравится" class="place__like" type="button"></button>
-            </div>
-
-          </article>
-        </li>
       </ul>
     </section>
 
@@ -108,11 +42,11 @@
     <p class="footer__author">&copy; 2021 Mesto Russia lisenkin</p>
   </footer>
 
-  <div class="popup">
+  <!-- попап для редактирования -->
+  <div class="popup popup-edit-card">
 
     <div class="popup__content">
-
-      <button aria-label="Закрыть" class="popup__close-button" type="button"></button>
+      <button aria-label="Закрыть" class="popup__close-button popup__close-button-edit" type="button"></button>
       <h2 class="popup__title">Редактировать профиль</h2>
       <form class="popup__form" name="popup-form" id="popup-form-edit">
         <input class="popup__input popup__input_type_name" type="text" placeholder="ваше имя" name="popup-input-name"
@@ -123,6 +57,44 @@
       </form>
     </div>
   </div>
+
+  <!-- попап для добавления -->
+
+  <div class="popup popup-add-card">
+    <div class="popup__content">
+      <button  aria-label="Закрыть" class="popup__close-button popup__close-button-add" type="button"></button>
+      <h2 class="popup__title">Новое место</h2>
+      <form class="popup__form" name="popup-form" id="popup-form-add">
+        <input class="popup__input popup__input_type_place-name" type="text" placeholder="Название"
+          name="popup-input-place-name"  required>
+        <input class="popup__input popup__input_type_photo" type="url" placeholder="Ссылка на картинку"
+          name="popup-input-url" required>
+        <button class="popup__button-submit" type="submit">Создать</button>
+      </form>
+    </div>
+  </div>
+
+  <section class="popup popup_dark popup-img" >
+    <figure class="popup__figure">
+      <button class="popup__close-button" type="button"></button>
+      <img class="popup__image" alt="Картинка" src="#">
+      <figcaption class="popup__caption"></figcaption>
+    </figure>
+  </section>
+
+<!--  темплейт для картинок -->
+  <template class="places-template">
+    <li class="places__item">
+    <article class="place">
+      <img class="place__photo" alt="Картинка" src="#">
+      <button class="place__button-remove" type="button"></button>
+      <div class="place__textarea">
+        <h2 class="place__text"></h2>
+          <button class="place__like" type="button"></button>
+      </div>
+    </article>
+  </li>
+  </template>
 
 
   <script src="script/index.js"></script>
