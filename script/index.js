@@ -29,11 +29,14 @@ const initialCards = [
 const popup = document.querySelector('.popup');
 const popupEdit = document.querySelector('.popup-edit-card'); //edit
 const popupAdd = document.querySelector('.popup-add-card'); //add
+const popupImg = document.querySelector('.popup-img');  //big image
+
 //open-close попап
 const openPopupBtn = document.querySelector('.profile__button-edit');
 const openPopupBtnAdd = document.querySelector('.profile__button-add'); //add
 const closePopupBtn = popupEdit.querySelector('.popup__close-button');
 const closePopupBtnAdd = popupAdd.querySelector('.popup__close-button');//add
+const closePopupBtnImg = popupImg.querySelector('.popup__close-button');//big image
 
 //получим с профиля данные
 let profileName = document.querySelector('.profile__name');
@@ -52,7 +55,9 @@ const formAdd = document.querySelector('#popup-form-add');
 const formAddInput = formAdd.querySelector('.popup__input_type_place-name');
 const formAddUrl = formAdd.querySelector('.popup__input_type_photo');
 const formAddBtnSubmit = formAdd.querySelector('.popup__button-submit');
-
+//большая картинка
+const fullPopupImage = document.querySelector('.popup__image');
+const popupCaption = document.querySelector('.popup__caption'); //подпись
 
 initialCards.forEach(item => {
   const placeItem = listItemTemplate.cloneNode(true); // склонировали
@@ -67,6 +72,13 @@ initialCards.forEach(item => {
   placeTitle.textContent = item.name;
   placePhoto.src = item.link;
   placePhoto.alt = item.name;
+  placePhoto.addEventListener('click', function () {
+    fullPopupImage.src = placePhoto.src;
+    fullPopupImage.alt = item.name;
+    popupCaption.textContent = item.name;
+    popupToggle(popupImg);
+});
+
 
   placesList.append(placeItem);
 });
@@ -86,6 +98,7 @@ const formSubmitHandlerAdd = (e) => {
   placeTitle.textContent = inputValue;
   placePhoto.src = inputUrl;
   placesList.prepend(placeItem);
+
   popupToggle(popupAdd);
 
 }
@@ -131,7 +144,9 @@ function closePopupAdd() {
   popupAdd.classList.remove('popup_visible');
 }
 
-
+function closePopupImg() {
+  popupImg.classList.remove('popup_visible');
+}
 //эвенты на кнопки\
 
 
@@ -141,6 +156,7 @@ closePopupBtn.addEventListener('click', closePopup);
 openPopupBtnAdd.addEventListener('click',openPopupAdd);
 closePopupBtnAdd.addEventListener('click', closePopupAdd);
 
+closePopupBtnImg.addEventListener('click',closePopupImg);
 
 // Обработчик «отправки» формы, хотя пока
 // она никуда отправляться не будет
