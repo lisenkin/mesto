@@ -34,6 +34,7 @@
 @import url(../blocks/place/__textarea/place__textarea.css);
 @import url(../blocks/place/__text/place__text.css);
 @import url(../blocks/place/__like/place__like.css);
+@import url(../blocks/place/__button-remove/place__button-remove.css);
 /* footer */
 
 @import url(../blocks/footer/footer.css);
