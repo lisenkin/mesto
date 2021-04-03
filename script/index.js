@@ -69,6 +69,7 @@ initialCards.forEach(item => {
   const placeTitle = placeItem.querySelector('.place__text');
   //удаление
   placeButtonDel.addEventListener('click', () => placeItems.remove())
+  placeBtnLike.addEventListener('click', () => placeBtnLike.classList.add('places__like_active'));
   placeTitle.textContent = item.name;
   placePhoto.src = item.link;
   placePhoto.alt = item.name;
@@ -95,6 +96,7 @@ const formSubmitHandlerAdd = (e) => {
   const placePhoto = placeItem.querySelector('.place__photo');
   const placeTitle = placeItem.querySelector('.place__text');
   placeButtonDel.addEventListener('click', () => placeItems.remove())
+  placeBtnLike.addEventListener('click', () => placeBtnLike.classList.add('places__like_active'));
   placeTitle.textContent = inputValue;
   placePhoto.src = inputUrl;
   placesList.prepend(placeItem);

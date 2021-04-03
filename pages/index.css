@@ -34,6 +34,7 @@
 @import url(../blocks/place/__textarea/place__textarea.css);
 @import url(../blocks/place/__text/place__text.css);
 @import url(../blocks/place/__like/place__like.css);
+@import url(../blocks/place/__like/_active/places__like_active.css);
 @import url(../blocks/place/__button-remove/place__button-remove.css);
 /* footer */
 
@@ -58,3 +59,4 @@
 @import url(../blocks/popup/__image/popup__image.css);
 @import url(../blocks/popup/__figure/popup__figure.css);
 @import url(../blocks/popup/__caption/popup__caption.css);
+
