@@ -69,7 +69,7 @@ initialCards.forEach(item => {
   const placeTitle = placeItem.querySelector('.place__text');
   //удаление
   placeButtonDel.addEventListener('click', () => placeItems.remove())
-  placeBtnLike.addEventListener('click', () => placeBtnLike.classList.add('places__like_active'));
+  placeBtnLike.addEventListener('click', () => placeBtnLike.classList.toggle('places__like_active'));
   placeTitle.textContent = item.name;
   placePhoto.src = item.link;
   placePhoto.alt = item.name;
