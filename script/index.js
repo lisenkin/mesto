@@ -67,18 +67,18 @@ initialCards.forEach(item => {
   const placeBtnLike = placeItem.querySelector('.place__like');
   const placePhoto = placeItem.querySelector('.place__photo');
   const placeTitle = placeItem.querySelector('.place__text');
-  //удаление
-  placeButtonDel.addEventListener('click', () => placeItems.remove())
-  placeBtnLike.addEventListener('click', () => placeBtnLike.classList.toggle('places__like_active'));
   placeTitle.textContent = item.name;
   placePhoto.src = item.link;
   placePhoto.alt = item.name;
+  //удаление
+  placeButtonDel.addEventListener('click', () => placeItems.remove())
+  placeBtnLike.addEventListener('click', () => placeBtnLike.classList.toggle('places__like_active')); //лайки
   placePhoto.addEventListener('click', function () {
     fullPopupImage.src = placePhoto.src;
     fullPopupImage.alt = item.name;
     popupCaption.textContent = item.name;
     popupToggle(popupImg);
-});
+  });
 
 
   placesList.append(placeItem);
@@ -109,12 +109,10 @@ formAdd.addEventListener('submit', formSubmitHandlerAdd);
 
 
 
-
-
-//функции на опен (для всех)
+//функции на тоггл (для всех), попробуем так
 function popupToggle(popup) {
 
-popup.classList.toggle('popup_visible');
+  popup.classList.toggle('popup_visible');
 }
 
 //сохранить из эдит попап (раньше было в опен)
@@ -126,21 +124,21 @@ function editProfile(event) {
 }
 
 
-
 function openPopup() {
-nameInput.value = profileName.textContent;
-jobInput.value = profileStatus.textContent;
-popup.classList.add('popup_visible');
+  nameInput.value = profileName.textContent;
+  jobInput.value = profileStatus.textContent;
+  popup.classList.add('popup_visible');
 
 }
 
 function openPopupAdd() {
-popupAdd.classList.add('popup_visible');
+  popupAdd.classList.add('popup_visible');
 
 }
-//функции на close
-function closePopup() {
- popup.classList.remove('popup_visible');
+
+//функции на close или стыдоба стыдобская, 3 одинаковых на одно действие
+/*function closePopup() {
+  popup.classList.remove('popup_visible');
 }
 function closePopupAdd() {
   popupAdd.classList.remove('popup_visible');
@@ -149,19 +147,20 @@ function closePopupAdd() {
 function closePopupImg() {
   popupImg.classList.remove('popup_visible');
 }
-//эвенты на кнопки\
+*/
 
+//эвент на редактировать
+openPopupBtn.addEventListener('click', openPopup);
+closePopupBtn.addEventListener('click', () => popupToggle(popupEdit));
+//эвент на добавить
+openPopupBtnAdd.addEventListener('click', openPopupAdd);
+closePopupBtnAdd.addEventListener('click', () => popupToggle(popupAdd));
+//закрытие большой картинки
+closePopupBtnImg.addEventListener('click', () => popupToggle(popupImg));
 
-openPopupBtn.addEventListener('click',openPopup);
-closePopupBtn.addEventListener('click', closePopup);
-
-openPopupBtnAdd.addEventListener('click',openPopupAdd);
-closePopupBtnAdd.addEventListener('click', closePopupAdd);
-
-closePopupBtnImg.addEventListener('click',closePopupImg);
 
 // Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будет
+// она никуда отправляться не будетz
 
 //для эдит
 function formSubmitHandler(evt) {
@@ -170,16 +169,15 @@ function formSubmitHandler(evt) {
   // Получите значение полей jobInput и nameInput из свойства value
   profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
-    //закроем
-    popupToggle(popupEdit);
+  //закроем
+  popupToggle(popupEdit);
+
 }
 
 // Прикрепляем обработчик к форме:
 // он будет следить за событием “submit” - «отправка»
 formElement.addEventListener('submit', formSubmitHandler);
 
-
-//для эдд написать Обработчик!!
 
 
 
