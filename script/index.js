@@ -39,13 +39,13 @@ const closePopupBtnAdd = popupAdd.querySelector('.popup__close-button');//add
 const closePopupBtnImg = popupImg.querySelector('.popup__close-button');//big image
 
 //получим с профиля данные
-let profileName = document.querySelector('.profile__name');
-let profileStatus = document.querySelector('.profile__status');
+const profileName = document.querySelector('.profile__name');
+const profileStatus = document.querySelector('.profile__status');
 // Находим форму в DOM
-let formElement = document.querySelector('.popup__form');
+const formElement = document.querySelector('.popup__form');
 //считаем что в форме
-let nameInput = document.querySelector('.popup__input_type_name');
-let jobInput = document.querySelector('.popup__input_type_status');
+const nameInput = document.querySelector('.popup__input_type_name');
+const jobInput = document.querySelector('.popup__input_type_status');
 
 // находим темплейт для карточек
 const placesList = document.querySelector('.places__list');
