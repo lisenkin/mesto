@@ -1,30 +1,3 @@
-//массив для карточек
-const initialCards = [
-  {
-    name: 'карелия',
-    link: './images/ruskeala.jpg'
-  },
-  {
-    name: 'Сочи',
-    link: './images/sochi.jpg'
-  },
-  {
-    name: 'балтийское море',
-    link: './images/baltica.jpg'
-  },
-  {
-    name: 'Карельский лес',
-    link: './images/karelia_les.jpg'
-  },
-  {
-    name: 'красная поляна',
-    link: './images/polyana.jpg'
-  },
-  {
-    name: 'кусшкая коса',
-    link: './images/kosa.jpg'
-  }
-];
 //все переменные про попап
 const popup = document.querySelector('.popup');
 const popupEdit = document.querySelector('.popup-edit-card'); //edit
@@ -37,7 +10,6 @@ const openPopupBtnAdd = document.querySelector('.profile__button-add'); //add
 const closePopupBtn = popupEdit.querySelector('.popup__close-button');
 const closePopupBtnAdd = popupAdd.querySelector('.popup__close-button');//add
 const closePopupBtnImg = popupImg.querySelector('.popup__close-button');//big image
-
 //получим с профиля данные
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
@@ -46,72 +18,23 @@ const formElement = document.querySelector('.popup__form');
 //считаем что в форме
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_status');
-
 // находим темплейт для карточек
 const placesList = document.querySelector('.places__list');
 const listItemTemplate = document.querySelector('.places-template').content;
 //найдем форму для добавления карточки
 const formAdd = document.querySelector('#popup-form-add');
-const formAddInput = formAdd.querySelector('.popup__input_type_place-name');
-const formAddUrl = formAdd.querySelector('.popup__input_type_photo');
+let formAddInput = formAdd.querySelector('.popup__input_type_place-name');
+let formAddUrl = formAdd.querySelector('.popup__input_type_photo');
 const formAddBtnSubmit = formAdd.querySelector('.popup__button-submit');
 //большая картинка
 const fullPopupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption'); //подпись
 
-initialCards.forEach(item => {
-  const placeItem = listItemTemplate.cloneNode(true); // склонировали
-  // ищем в карточке
-  const placeItems = placeItem.querySelector('.place');
-  const placeButtonDel = placeItem.querySelector('.place__button-remove');
-  const placeBtnLike = placeItem.querySelector('.place__like');
-  const placePhoto = placeItem.querySelector('.place__photo');
-  const placeTitle = placeItem.querySelector('.place__text');
-  placeTitle.textContent = item.name;
-  placePhoto.src = item.link;
-  placePhoto.alt = item.name;
-  //удаление
-  placeButtonDel.addEventListener('click', () => placeItems.remove())
-  placeBtnLike.addEventListener('click', () => placeBtnLike.classList.toggle('places__like_active')); //лайки
-  placePhoto.addEventListener('click', function () {
-    fullPopupImage.src = placePhoto.src;
-    fullPopupImage.alt = item.name;
-    popupCaption.textContent = item.name;
-    popupToggle(popupImg);
-  });
-
-
-  placesList.append(placeItem);
-});
-
-
-const formSubmitHandlerAdd = (e) => {
-  e.preventDefault()
-  const placeItem = listItemTemplate.cloneNode(true);
-  inputValue = formAddInput.value;
-  inputUrl = formAddUrl.value;
-  const placeItems = placeItem.querySelector('.place');
-  const placeButtonDel = placeItem.querySelector('.place__button-remove');
-  const placeBtnLike = placeItem.querySelector('.place__like');
-  const placePhoto = placeItem.querySelector('.place__photo');
-  const placeTitle = placeItem.querySelector('.place__text');
-  placeButtonDel.addEventListener('click', () => placeItems.remove())
-  placeBtnLike.addEventListener('click', () => placeBtnLike.classList.add('places__like_active'));
-  placeTitle.textContent = inputValue;
-  placePhoto.src = inputUrl;
-  placesList.prepend(placeItem);
-
-  popupToggle(popupAdd);
-
-}
-//submit на форму
-formAdd.addEventListener('submit', formSubmitHandlerAdd);
-
+let placeItem ; //вынесла для функций
 
 
 //функции на тоггл (для всех), попробуем так
-function popupToggle(popup) {
-
+function togglePopup(popup) {
   popup.classList.toggle('popup_visible');
 }
 
@@ -120,62 +43,88 @@ function editProfile(event) {
   event.preventDefault();
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
-  popupToggle(popupEdit);
+  togglePopup(popupEdit);
 }
-
-
-function openPopup() {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileStatus.textContent;
-  popup.classList.add('popup_visible');
-
-}
-
-function openPopupAdd() {
-  popupAdd.classList.add('popup_visible');
-
-}
-
-//функции на close или стыдоба стыдобская, 3 одинаковых на одно действие
-/*function closePopup() {
-  popup.classList.remove('popup_visible');
-}
-function closePopupAdd() {
-  popupAdd.classList.remove('popup_visible');
-}
-
-function closePopupImg() {
-  popupImg.classList.remove('popup_visible');
-}
-*/
-
-//эвент на редактировать
-openPopupBtn.addEventListener('click', openPopup);
-closePopupBtn.addEventListener('click', () => popupToggle(popupEdit));
-//эвент на добавить
-openPopupBtnAdd.addEventListener('click', openPopupAdd);
-closePopupBtnAdd.addEventListener('click', () => popupToggle(popupAdd));
-//закрытие большой картинки
-closePopupBtnImg.addEventListener('click', () => popupToggle(popupImg));
-
-
-// Обработчик «отправки» формы, хотя пока
-// она никуда отправляться не будетz
-
-//для эдит
 function formSubmitHandler(evt) {
   evt.preventDefault();
-
   // Получите значение полей jobInput и nameInput из свойства value
   profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
   //закроем
-  popupToggle(popupEdit);
+  togglePopup(popupEdit);
 
 }
 
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+// -----> большое спасибо за разьяснение ошибок и советы по улучшениям в ревью! <-------
+// функция cоздаем карточку и пишем все.
+function createCardPlace(item) {
+  placeItem = listItemTemplate.cloneNode(true);
+
+  const placePhoto = placeItem.querySelector('.place__photo');
+  const placeTitle = placeItem.querySelector('.place__text');
+  //считываем и записываем
+  placeTitle.textContent = item.name;
+  placePhoto.src = item.link;
+  placePhoto.alt = item.name;
+  //лайки, удаление и большая картинка
+  handleDelete();
+  handleLikeIcon(); //лайки
+  //вызов функции большой картинки с параметрами которые туда надо передать из переменных сверху
+  placePhoto.addEventListener('click', () => handleFullPicture(item,placePhoto,placeTitle));
+  // возвращаем элемент для других
+    return placeItem;
+}
+//функция отрисовки карточек по дате, в контейнер (контейнер в самбите)
+function renderCard(data, wrap) {
+  wrap.prepend(createCardPlace(data));
+};
+
+// функция на лайки
+function handleLikeIcon(data){
+const placeBtnLike = placeItem.querySelector('.place__like'); //лайки
+placeBtnLike.addEventListener('click', () => placeBtnLike.classList.toggle('places__like_active'));
+}
+//функция на удаление
+function handleDelete(data){
+  const placeButtonDel = placeItem.querySelector('.place__button-remove');
+  const placeItems = placeItem.querySelector('.places__item');  // <----- вот тут удаляла не то
+  placeButtonDel.addEventListener('click', () => placeItems.remove()) //нашла косяк, удаляла не то
+}
+// большая картинка
+function handleFullPicture(item,placePhoto,placeTitle){
+    fullPopupImage.src = placePhoto.src;
+    fullPopupImage.alt = item.name;
+    popupCaption.textContent = item.name;
+    togglePopup(popupImg);
+}
+ //для эдит
+const formSubmitHandlerAdd = (e) => {
+  e.preventDefault()
+  renderCard({
+    name: formAddInput.value,
+    link: formAddUrl.value
+  }, placesList);
+  formAddInput.value ='';
+  formAddUrl.value = '';
+  togglePopup(popupAdd);
+}
+//отрисовка начальных карточек
+initialCards.forEach((data) => {
+  renderCard(data, placesList) // <----- сюда контейнер куда вставлять карточки
+ });
+
+//эвенты
+
+//эвент на редактировать
+openPopupBtn.addEventListener('click', () => togglePopup(popupEdit));
+closePopupBtn.addEventListener('click', () => togglePopup(popupEdit));
+//эвент на добавить
+openPopupBtnAdd.addEventListener('click',  () => togglePopup(popupAdd));
+closePopupBtnAdd.addEventListener('click', () => togglePopup(popupAdd));
+//закрытие большой картинки
+closePopupBtnImg.addEventListener('click', () => togglePopup(popupImg));
+//submit на форму
+formAdd.addEventListener('submit', formSubmitHandlerAdd);
 formElement.addEventListener('submit', formSubmitHandler);
 
 
