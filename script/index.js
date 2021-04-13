@@ -14,8 +14,16 @@ const closePopupBtnImg = popupImg.querySelector('.popup__close-button');//big im
 //со страницы
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
+
 // Находим форму в DOM
+
 const formElement = document.querySelector('.popup__form');
+const formInput = formElement.querySelector('.popup__input');
+console.log(formInput.id);
+const formError = formElement.querySelector(`.${formInput.id}-error`);
+console.log(formError)
+
+
 //считаем что в форме
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_status');
@@ -96,8 +104,49 @@ initialCards.forEach((data) => {
 });
 
 
+
+ const showError = (input, errorMessage) => {
+  input.classList.add('popup__input_invalid');
+
+  formError.textContent = errorMessage;
+  console.log(errorMessage)
+  formError.classList.add('popup__error_active');
+};
+
+
+//спрятать
+const hideError = (input) => {
+  input.classList.remove('popup__input_invalid');
+};
+
+
+
+const checkInputValidity = () => {
+  if (!formInput.validity.valid) {
+ showError(formInput)
+ console.log('blabla');
+} else {
+ hideError(formInput)
+ console.log('yeah');
+}
+};
+
+
+
+//эвенты
+=======
+>>>>>>> main
+
+formElement.addEventListener('submit', function (evt) {
+  evt.preventDefault();
+});
+
+formInput.addEventListener('input', function () {
+  checkInputValidity();
+});
+
 //эвент на редактировать
-openPopupBtn.addEventListener('click', () => togglePopup(popupEdit));
+openPopupBtn.addEventListener('click', editProfile);
 closePopupBtn.addEventListener('click', () => togglePopup(popupEdit));
 //эвент на добавить
 openPopupBtnAdd.addEventListener('click', () => togglePopup(popupAdd));
@@ -106,6 +155,7 @@ closePopupBtnAdd.addEventListener('click', () => togglePopup(popupAdd));
 closePopupBtnImg.addEventListener('click', () => togglePopup(popupImg));
 //submit на форму
 formAdd.addEventListener('submit', formSubmitHandlerAdd);
+
 formElement.addEventListener('submit', formSubmitHandler);
 
 
