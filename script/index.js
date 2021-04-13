@@ -10,7 +10,8 @@ const openPopupBtnAdd = document.querySelector('.profile__button-add'); //add
 const closePopupBtn = popupEdit.querySelector('.popup__close-button');
 const closePopupBtnAdd = popupAdd.querySelector('.popup__close-button');//add
 const closePopupBtnImg = popupImg.querySelector('.popup__close-button');//big image
-//получим с профиля данные
+
+//со страницы
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
 
@@ -26,19 +27,16 @@ console.log(formError)
 //считаем что в форме
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_status');
-// находим темплейт для карточек
-const placesList = document.querySelector('.places__list');
-const listItemTemplate = document.querySelector('.places-template').content;
+const placesList = document.querySelector('.places__list');  //ul куда вставлять
 //найдем форму для добавления карточки
 const formAdd = document.querySelector('#popup-form-add');
-let formAddInput = formAdd.querySelector('.popup__input_type_place-name');
-let formAddUrl = formAdd.querySelector('.popup__input_type_photo');
+const formAddInput = formAdd.querySelector('.popup__input_type_place-name');
+const formAddUrl = formAdd.querySelector('.popup__input_type_photo');
 const formAddBtnSubmit = formAdd.querySelector('.popup__button-submit');
+
 //большая картинка
 const fullPopupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption'); //подпись
-
-let placeItem ; //вынесла для функций
 
 
 //функции на тоггл (для всех), попробуем так
@@ -46,7 +44,7 @@ function togglePopup(popup) {
   popup.classList.toggle('popup_visible');
 }
 
-//сохранить из эдит попап (раньше было в опен)
+//сохранить из эдит попап
 function editProfile(event) {
   event.preventDefault();
   nameInput.value = profileName.textContent;
@@ -58,68 +56,53 @@ function formSubmitHandler(evt) {
   // Получите значение полей jobInput и nameInput из свойства value
   profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
-  //закроем
   togglePopup(popupEdit);
-
 }
 
-// -----> большое спасибо за разьяснение ошибок и советы по улучшениям в ревью! <-------
-// функция cоздаем карточку и пишем все.
-function createCardPlace(item) {
-  placeItem = listItemTemplate.cloneNode(true);
 
+// функция cоздаем карточку и пишем все.
+function createCardPlace(item, template) {
+  const cardTemplate = document.querySelector('#card-template').content.querySelector('.places__item');
+  const placeItem = cardTemplate.cloneNode(true);
   const placePhoto = placeItem.querySelector('.place__photo');
   const placeTitle = placeItem.querySelector('.place__text');
-  //считываем и записываем
+  const placeBtnLike = placeItem.querySelector('.place__like');
+  const placeButtonDel = placeItem.querySelector('.place__button-remove');
   placeTitle.textContent = item.name;
   placePhoto.src = item.link;
   placePhoto.alt = item.name;
-  //лайки, удаление и большая картинка
-  handleDelete();
-  handleLikeIcon(); //лайки
-  //вызов функции большой картинки с параметрами которые туда надо передать из переменных сверху
-  placePhoto.addEventListener('click', () => handleFullPicture(item,placePhoto,placeTitle));
-  // возвращаем элемент для других
-    return placeItem;
+//если выносить в отдельные функции, то с const они не работают
+  placeButtonDel.addEventListener('click', () => placeItem.remove());
+  placeBtnLike.addEventListener('click', () => placeBtnLike.classList.toggle('places__like_active'));
+  placePhoto.addEventListener('click', function () {
+      fullPopupImage.src = placePhoto.src;
+  fullPopupImage.alt = item.name;
+  popupCaption.textContent = item.name;
+  togglePopup(popupImg);
+    });
+    return placeItem
 }
 //функция отрисовки карточек по дате, в контейнер (контейнер в самбите)
-function renderCard(data, wrap) {
-  wrap.prepend(createCardPlace(data));
+function renderCard(item, template) {
+  template.prepend(createCardPlace(item,template));
 };
 
-// функция на лайки
-function handleLikeIcon(data){
-const placeBtnLike = placeItem.querySelector('.place__like'); //лайки
-placeBtnLike.addEventListener('click', () => placeBtnLike.classList.toggle('places__like_active'));
-}
-//функция на удаление
-function handleDelete(data){
-  const placeButtonDel = placeItem.querySelector('.place__button-remove');
-  const placeItems = placeItem.querySelector('.places__item');  // <----- вот тут удаляла не то
-  placeButtonDel.addEventListener('click', () => placeItems.remove()) //нашла косяк, удаляла не то
-}
-// большая картинка
-function handleFullPicture(item,placePhoto,placeTitle){
-    fullPopupImage.src = placePhoto.src;
-    fullPopupImage.alt = item.name;
-    popupCaption.textContent = item.name;
-    togglePopup(popupImg);
-}
- //для эдит
+//для добавления карты
 const formSubmitHandlerAdd = (e) => {
   e.preventDefault()
   renderCard({
     name: formAddInput.value,
     link: formAddUrl.value
   }, placesList);
-  formAddInput.value ='';
+  formAddInput.value = '';
   formAddUrl.value = '';
   togglePopup(popupAdd);
 }
 //отрисовка начальных карточек
 initialCards.forEach((data) => {
   renderCard(data, placesList) // <----- сюда контейнер куда вставлять карточки
- });
+});
+
 
 
  const showError = (input, errorMessage) => {
@@ -151,6 +134,8 @@ const checkInputValidity = () => {
 
 
 //эвенты
+=======
+>>>>>>> main
 
 formElement.addEventListener('submit', function (evt) {
   evt.preventDefault();
@@ -164,7 +149,7 @@ formInput.addEventListener('input', function () {
 openPopupBtn.addEventListener('click', editProfile);
 closePopupBtn.addEventListener('click', () => togglePopup(popupEdit));
 //эвент на добавить
-openPopupBtnAdd.addEventListener('click',  () => togglePopup(popupAdd));
+openPopupBtnAdd.addEventListener('click', () => togglePopup(popupAdd));
 closePopupBtnAdd.addEventListener('click', () => togglePopup(popupAdd));
 //закрытие большой картинки
 closePopupBtnImg.addEventListener('click', () => togglePopup(popupImg));
