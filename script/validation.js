@@ -2,14 +2,14 @@
 function enableValidation(config) {
   const forms = Array.from(document.querySelectorAll(config.formSelector)); // соберем все
 //для _каждой_ формы из форм
-console.log(forms);
+//console.log(forms);
   forms.forEach(form => {
     form.addEventListener('submit', function (evt) {
       evt.preventDefault();
     });
 //соберем инпуты (все) и кнопки
      const inputs = Array.from(form.querySelectorAll(config.inputSelector))
-     console.log(inputs)
+     //console.log(inputs)
      const buttonElement = form.querySelector(config.submitButtonSelector);
      // для каждого инпута чек на валидность и дерганье кнопки
      inputs.forEach(input => {
@@ -19,14 +19,13 @@ console.log(forms);
         })
      })
   })
-  //toggleBtnState(forms,buttonElement); сюда бы по дефолту, но тут не виден buttonElement.
-  //подумать УТРОМ как передавать мб колбеком
 };
+
 
 const showError = (input,errorMessage,form) => {
   const formError = form.querySelector(`.${input.id}-error`);
   //console.log(formError)
-  formError.classList.add('popup__input_invalid'); // полоска
+  input.classList.add('popup__input_invalid'); // полоска
   formError.textContent = errorMessage;
   //console.log(errorMessage)
   formError.classList.add('popup__error_active');//span
@@ -38,8 +37,6 @@ const hideError = (input,form) => {
   //console.log(errorMessage)
   formError.classList.remove('popup__error_active');
 };
-
-
 
 //проверка валидности ввода
 const checkInputValidity = (input,form) => {

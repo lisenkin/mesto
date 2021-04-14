@@ -101,7 +101,15 @@ initialCards.forEach((data) => {
 });
 
 
+
 //эвенты
+document.addEventListener('keydown', (evt) => {
+  if (evt.key === 'Escape') {
+      const popups = document.querySelector('.popup_visible')
+      popups.classList.remove("popup_visible")
+  };
+});
+
 
 formElement.addEventListener('submit', function (evt) {
   evt.preventDefault();
@@ -123,7 +131,6 @@ closePopupBtnImg.addEventListener('click', () => togglePopup(popupImg));
 formAdd.addEventListener('submit', formSubmitHandlerAdd);
 
 formElement.addEventListener('submit', formSubmitHandler);
-
 
 
 
