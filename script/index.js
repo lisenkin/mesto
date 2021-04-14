@@ -19,9 +19,6 @@ const profileStatus = document.querySelector('.profile__status');
 
 const formElement = document.querySelector('.popup__form');
 const formInput = formElement.querySelector('.popup__input');
-console.log(formInput.id);
-const formError = formElement.querySelector(`.${formInput.id}-error`);
-console.log(formError)
 
 
 //считаем что в форме
@@ -104,38 +101,7 @@ initialCards.forEach((data) => {
 });
 
 
-
- const showError = (input, errorMessage) => {
-  input.classList.add('popup__input_invalid');
-
-  formError.textContent = errorMessage;
-  console.log(errorMessage)
-  formError.classList.add('popup__error_active');
-};
-
-
-//спрятать
-const hideError = (input) => {
-  input.classList.remove('popup__input_invalid');
-};
-
-
-
-const checkInputValidity = () => {
-  if (!formInput.validity.valid) {
- showError(formInput)
- console.log('blabla');
-} else {
- hideError(formInput)
- console.log('yeah');
-}
-};
-
-
-
 //эвенты
-=======
->>>>>>> main
 
 formElement.addEventListener('submit', function (evt) {
   evt.preventDefault();
