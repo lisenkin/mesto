@@ -68,20 +68,20 @@ function createCardPlace(item, template) {
   placeTitle.textContent = item.name;
   placePhoto.src = item.link;
   placePhoto.alt = item.name;
-//если выносить в отдельные функции, то с const они не работают
+  //если выносить в отдельные функции, то с const они не работают
   placeButtonDel.addEventListener('click', () => placeItem.remove());
   placeBtnLike.addEventListener('click', () => placeBtnLike.classList.toggle('places__like_active'));
   placePhoto.addEventListener('click', function () {
-      fullPopupImage.src = placePhoto.src;
-  fullPopupImage.alt = item.name;
-  popupCaption.textContent = item.name;
-  togglePopup(popupImg);
-    });
-    return placeItem
+    fullPopupImage.src = placePhoto.src;
+    fullPopupImage.alt = item.name;
+    popupCaption.textContent = item.name;
+    togglePopup(popupImg);
+  });
+  return placeItem
 }
 //функция отрисовки карточек по дате, в контейнер (контейнер в самбите)
 function renderCard(item, template) {
-  template.prepend(createCardPlace(item,template));
+  template.prepend(createCardPlace(item, template));
 };
 
 //для добавления карты
@@ -105,10 +105,24 @@ initialCards.forEach((data) => {
 //эвенты
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
-      const popups = document.querySelector('.popup_visible')
-      popups.classList.remove("popup_visible")
+    const popups = document.querySelector('.popup_visible')
+    popups.classList.remove("popup_visible")
   };
 });
+
+
+const popupsOpent = Array.from(document.querySelectorAll('.popup'));
+console.log(popupsOpent);
+popupsOpent.forEach(popup => {
+  popup.addEventListener('click', evt => {
+    //const overlay = document.querySelector('.popup') // div общий попапа
+    if (evt.target.classList.contains('popup_visible')) { //
+      console.log('overlay! yay')
+      togglePopup(popup)
+    }
+  });
+}
+);
 
 
 formElement.addEventListener('submit', function (evt) {
