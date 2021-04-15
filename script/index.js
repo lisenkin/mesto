@@ -101,7 +101,18 @@ initialCards.forEach((data) => {
 });
 
 
-
+const popupsOpent = Array.from(document.querySelectorAll('.popup'));
+//console.log(popupsOpent);
+popupsOpent.forEach(popup => {
+  popup.addEventListener('click', evt => {
+    //const overlay = document.querySelector('.popup') // div общий попапа
+    if (evt.target.classList.contains('popup_visible')) { //
+     // console.log('overlay! yay')
+      togglePopup(popup)
+    }
+  });
+}
+);
 //эвенты
 document.addEventListener('keydown', (evt) => {
   if (evt.key === 'Escape') {
@@ -111,18 +122,7 @@ document.addEventListener('keydown', (evt) => {
 });
 
 
-const popupsOpent = Array.from(document.querySelectorAll('.popup'));
-console.log(popupsOpent);
-popupsOpent.forEach(popup => {
-  popup.addEventListener('click', evt => {
-    //const overlay = document.querySelector('.popup') // div общий попапа
-    if (evt.target.classList.contains('popup_visible')) { //
-      console.log('overlay! yay')
-      togglePopup(popup)
-    }
-  });
-}
-);
+
 
 
 formElement.addEventListener('submit', function (evt) {
