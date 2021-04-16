@@ -65,7 +65,7 @@ const buttonElement = formElement.querySelector(conf.submitButtonSelector);
           toggleBtnState(inputList, buttonElement,conf);
       });
   });
-  // сделаем чтобы кнопка была неактивна сразу при инициализации
+  // сделаем чтобы проверялось до ввода
   toggleBtnState(inputList, buttonElement,conf);
 };
 
