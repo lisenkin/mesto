@@ -1,61 +1,48 @@
-//главная функа на валидацию
-function enableValidation(config) {
-  const forms = Array.from(document.querySelectorAll(config.formSelector)); // соберем все
-//для _каждой_ формы из форм
-//console.log(forms);
-  forms.forEach(form => {
-    form.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-//соберем инпуты (все) и кнопки
-     const inputs = Array.from(form.querySelectorAll(config.inputSelector))
-     //console.log(inputs)
-     const buttonElement = form.querySelector(config.submitButtonSelector);
-     // для каждого инпута чек на валидность и дерганье кнопки
-     inputs.forEach(input => {
-        input.addEventListener('input',() => {
-           checkInputValidity(input, form);
-           toggleBtnState(inputs,buttonElement);
-        })
-     })
-  })
+// все настройки передаются при вызове
+const conf = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-submit',
+  inactiveButtonClass: 'popup__button-submit_invalid',
+  inputErrorClass: 'popup__input_invalid',
+  errorClass: 'popup__error'
 };
 
 
-const showError = (input,errorMessage,form) => {
-  const formError = form.querySelector(`.${input.id}-error`);
+
+const showError = (formElement,inputElement,errorMessage,conf) => {
+  const formError = formElement.querySelector(`.${inputElement.id}-error`);
   //console.log(formError)
-  input.classList.add('popup__input_invalid'); // полоска
+  inputElement.classList.add('popup__input_invalid'); // полоска
   formError.textContent = errorMessage;
   //console.log(errorMessage)
   formError.classList.add('popup__error_active');//span
 };
 //спрятать
-const hideError = (input,form) => {
-  const formError = form.querySelector(`.${input.id}-error`);
+const hideError = (formElement,inputElement,conf) => {
+  const formError = formElement.querySelector(`.${inputElement.id}-error`);
   formError.textContent = '';
   //console.log(errorMessage)
   formError.classList.remove('popup__error_active');
+  inputElement.classList.remove('popup__input_invalid');
 };
 
 //проверка валидности ввода
-const checkInputValidity = (input,form) => {
-  const isNotValid = !input.validity.valid;
-  if (isNotValid) {
-    //const errorMessage = input.validationMessage;
- showError(input,input.validationMessage,form)
- //console.log('blablabla NET');
+const checkInputValidity = (formElement,inputElement,errorMessage,conf) => {
+  if  (inputElement.validity.valid) {
+    hideError(formElement,inputElement,conf)
 } else {
- hideError(input,form)
- //console.log('yeah');
+  showError(formElement,inputElement,errorMessage,conf)
 }
 };
 
 //дергать кнопку для ВСЕГО МАССИВА инпутс
-const toggleBtnState = (inputs,buttonElement) => {
-  const isValid = inputs.every(input => input.validity.valid)
-  if (!isValid) { // проверка та
-    buttonElement.setAttribute('disabled', true);
+const toggleBtnState = (inputList,buttonElement,conf) => {
+  const hasInvalidInput = inputList.some(
+    (inputElement) => !inputElement.validity.valid // если хоть один из, вместо every который был
+);
+  if (hasInvalidInput) { // проверка та
+    buttonElement.setAttribute('disabled','');
     buttonElement.classList.add("popup__button-submit_invalid");
     //console.log('button ne ok')
    } else {
@@ -65,16 +52,40 @@ const toggleBtnState = (inputs,buttonElement) => {
    }
 }
 
+const setEventListeners = (formElement,conf) => {
+//соберем инпуты (все) и кнопки
+const inputList = Array.from(formElement.querySelectorAll(conf.inputSelector));
+console.log(inputList)
+const buttonElement = formElement.querySelector(conf.submitButtonSelector);
+// для каждого инпута чек на валидность и дерганье кнопки
+  inputList.forEach(inputElement => {
+      inputElement.addEventListener("input", (event) => {
+          checkInputValidity(formElement, inputElement,inputElement.validationMessage,conf);
+          toggleBtnState(inputList, buttonElement,conf);
+      });
+  });
+  // сделаем чтобы кнопка была неактивна сразу при инициализации
+  toggleBtnState(inputList, buttonElement,conf);
+};
+
+
+//главная функа на валидацию
+//переименовала переменные по-понятнее.
+
+const enableValidation = (conf) => {
+  const formList = Array.from(document.querySelectorAll(conf.formSelector)) // соберем все
+//console.log(formsList);
+//для _каждой_ формы из форм
+formList.forEach(formElement =>{
+formElement.addEventListener('submit',e =>{
+  e.preventDefault();
+});
+setEventListeners(formElement,conf);
+})
+};
 
 
 // включение валидации вызовом enableValidation
-// все настройки передаются при вызове
-enableValidation({
-  formSelector: '.popup__form',
-  inputSelector: '.popup__input',
-  submitButtonSelector: '.popup__button-submit',
-  inactiveButtonClass: 'popup__button-submit_invalid',
-  inputErrorClass: 'popup__input_invalid',
-  errorClass: 'popup__error'
-});
+enableValidation(conf);
+
 

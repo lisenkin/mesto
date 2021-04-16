@@ -123,16 +123,6 @@ document.addEventListener('keydown', (evt) => {
 
 
 
-
-
-formElement.addEventListener('submit', function (evt) {
-  evt.preventDefault();
-});
-
-formInput.addEventListener('input', function () {
-  checkInputValidity();
-});
-
 //эвент на редактировать
 openPopupBtn.addEventListener('click', editProfile);
 closePopupBtn.addEventListener('click', () => togglePopup(popupEdit));
