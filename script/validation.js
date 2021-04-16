@@ -1,4 +1,4 @@
-// все настройки передаются при вызове
+// все настройки 
 const conf = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -23,8 +23,8 @@ const hideError = (formElement,inputElement,conf) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`);
   formError.textContent = '';
   //console.log(errorMessage)
-  formError.classList.remove('popup__error_active');
-  inputElement.classList.remove('popup__input_invalid');
+  formError.classList.remove('popup__error_active');//полоска
+  inputElement.classList.remove('popup__input_invalid');//span
 };
 
 //проверка валидности ввода

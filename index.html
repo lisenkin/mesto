@@ -61,13 +61,13 @@
   </div>
 
   <!-- попап для добавления -->
-
+<!-- кто забыл убрать полоску красную подмиксованную для отладки тот переписал весь JS  -_- -->
   <div class="popup popup-add-card">
     <div class="popup__content">
       <button  aria-label="Закрыть" class="popup__close-button popup__close-button-add" type="button"></button>
       <h2 class="popup__title">Новое место</h2>
       <form class="popup__form" name="popup-form" id="popup-form-add" novalidate>
-        <input class="popup__input popup__input_type_place-name popup__input_invalid" type="text" placeholder="Название"
+        <input class="popup__input popup__input_type_place-name" type="text" placeholder="Название"
           id="popup-input-place-name" minlength="2" maxlength="30"  required>
           <span  class="popup__error popup-input-place-name-error"></span>
         <input class="popup__input popup__input_type_photo" type="url" placeholder="Ссылка на картинку"
