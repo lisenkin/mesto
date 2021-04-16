@@ -1,4 +1,4 @@
-// все настройки 
+// все настройки
 const conf = {
   formSelector: '.popup__form',
   inputSelector: '.popup__input',
@@ -29,10 +29,11 @@ const hideError = (formElement,inputElement,conf) => {
 
 //проверка валидности ввода
 const checkInputValidity = (formElement,inputElement,errorMessage,conf) => {
-  if  (inputElement.validity.valid) {
-    hideError(formElement,inputElement,conf)
+  if  (!inputElement.validity.valid) {
+    showError(formElement,inputElement,errorMessage,conf)
+
 } else {
-  showError(formElement,inputElement,errorMessage,conf)
+  hideError(formElement,inputElement,conf)
 }
 };
 
@@ -55,7 +56,7 @@ const toggleBtnState = (inputList,buttonElement,conf) => {
 const setEventListeners = (formElement,conf) => {
 //соберем инпуты (все) и кнопки
 const inputList = Array.from(formElement.querySelectorAll(conf.inputSelector));
-console.log(inputList)
+//console.log(inputList)
 const buttonElement = formElement.querySelector(conf.submitButtonSelector);
 // для каждого инпута чек на валидность и дерганье кнопки
   inputList.forEach(inputElement => {
