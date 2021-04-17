@@ -160,7 +160,6 @@ function pressEscapeButton(evt) {
 openPopupBtn.addEventListener('click',openEditProfileForm);
 closePopupBtn.addEventListener('click', () => togglePopup(popupEdit));
 //эвент на добавить
-closePopupBtnAdd.addEventListener('click', () => togglePopup(popupAdd));
 openPopupBtnAdd.addEventListener('click', () => openPopupFormWithReset(popupAdd)); // <----сделала отдельную функцию на открытие с ресетом
 closePopupBtnAdd.addEventListener('click', () => togglePopup(popupAdd));
 //закрытие большой картинки
