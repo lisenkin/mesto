@@ -64,6 +64,8 @@ const toggleBtnState = (inputList,buttonElement,validationConfig) => {
    }
 }
 
+
+
 const setEventListeners = (formElement,validationConfig) => {
 //соберем инпуты (все) и кнопки
 
@@ -74,15 +76,18 @@ deactivateButton(buttonElement);
 // для каждого инпута чек на валидность и дерганье кнопки
   inputList.forEach(inputElement => {
       inputElement.addEventListener("input", (event) => {
+        if (inputElement.value !== '') {
           checkInputValidity(formElement, inputElement,inputElement.validationMessage,validationConfig);
           toggleBtnState(inputList, buttonElement,validationConfig);
+        }
+        else {
+          hideError (formElement, inputElement, validationConfig);
+        }
       });
   });
   // сделаем чтобы проверялось до ввода
   toggleBtnState(inputList, buttonElement,validationConfig);
 };
-
-
 //главная функа на валидацию
 //переименовала переменные по-понятнее.
 

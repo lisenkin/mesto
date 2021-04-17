@@ -47,7 +47,6 @@ function togglePopup(popup) {
   }
   formAddCard.reset();
   popup.classList.toggle('popup_visible');
-
 }
 
 
@@ -99,10 +98,10 @@ function renderCard(item, template) {
 };
 
 
-
 //для добавления карты
 const addCardFormSubmitHandler = (e) => {
   e.preventDefault()
+
   renderCard({
     name: formAddInput.value,
     link: formAddUrl.value
@@ -111,6 +110,7 @@ const addCardFormSubmitHandler = (e) => {
   formAddCard.reset();
   formAddBtnSubmit.setAttribute('disabled',true);
   formAddBtnSubmit.classList.add(validationConfig.inactiveButtonClass);
+  
 }
 //отрисовка начальных карточек
 initialCards.forEach((data) => {
