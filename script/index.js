@@ -46,14 +46,16 @@ function togglePopup(popup) {
   else {
     document.removeEventListener('keydown', pressEscapeButton);
   }
-  formAddCard.reset();
+  //formAddCard.reset();
   popup.classList.toggle('popup_visible');
 }
+
 
 
 //сохранить из эдит попап
 function openEditProfileForm(event) {
   event.preventDefault();
+  checkFormValidity(formAddCard,validationConfig);
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
   document.addEventListener('keydown', pressEscapeButton);
@@ -106,11 +108,21 @@ const addCardFormSubmitHandler = (e) => {
     name: formAddInput.value,
     link: formAddUrl.value
   }, placesList);
-  togglePopup(popupAdd);
   formAddCard.reset();
+  checkFormValidity(formAddCard,validationConfig);
+  togglePopup(popupAdd);
   formAddBtnSubmit.setAttribute('disabled',true);
   formAddBtnSubmit.classList.add(validationConfig.inactiveButtonClass);
 }
+
+
+//пришлось сделать отдельную функцию на открытие с ресетом, что б убрать его из тоггл для всех. надеюсь это логически правильно :)
+function openPopupFormWithReset(element) {
+  formAddCard.reset();
+  checkFormValidity(formAddCard,validationConfig);
+  togglePopup(element);
+}
+
 //отрисовка начальных карточек
 initialCards.forEach((data) => {
 
@@ -149,7 +161,8 @@ function pressEscapeButton(evt) {
 openPopupBtn.addEventListener('click',openEditProfileForm);
 closePopupBtn.addEventListener('click', () => togglePopup(popupEdit));
 //эвент на добавить
-openPopupBtnAdd.addEventListener('click', () => togglePopup(popupAdd));
+closePopupBtnAdd.addEventListener('click', () => togglePopup(popupAdd));
+openPopupBtnAdd.addEventListener('click', () => openPopupFormWithReset(popupAdd)); // <----сделала отдельную функцию на открытие с ресетом
 closePopupBtnAdd.addEventListener('click', () => togglePopup(popupAdd));
 //закрытие большой картинки
 closePopupBtnImg.addEventListener('click', () => togglePopup(popupImg));
