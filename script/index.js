@@ -46,7 +46,6 @@ function togglePopup(popup) {
   else {
     document.removeEventListener('keydown', pressEscapeButton);
   }
-  //formAddCard.reset();
   popup.classList.toggle('popup_visible');
 }
 
