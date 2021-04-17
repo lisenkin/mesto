@@ -19,13 +19,14 @@ const profileStatus = document.querySelector('.profile__status');
 
 const formEditProfile = document.querySelector('.popup__form');
 const formInput = formEditProfile.querySelector('.popup__input');
-
+const formEditCard = document.querySelector("#popup-form-edit");
 
 //считаем что в форме
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_status');
 const placesList = document.querySelector('.places__list');  //ul куда вставлять
 //найдем форму для добавления карточки
+
 const formAddCard = document.querySelector('#popup-form-add');
 const formAddInput = formAddCard.querySelector('.popup__input_type_place-name');
 const formAddUrl = formAddCard.querySelector('.popup__input_type_photo');
@@ -54,10 +55,10 @@ function togglePopup(popup) {
 //сохранить из эдит попап
 function openEditProfileForm(event) {
   event.preventDefault();
-  checkFormValidity(formEditProfile,validationConfig);
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
   document.addEventListener('keydown', pressEscapeButton);
+  checkFormValidity(formEditCard,validationConfig);
   togglePopup(popupEdit);
 
 }
