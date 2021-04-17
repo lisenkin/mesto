@@ -38,6 +38,7 @@ const popupCaption = document.querySelector('.popup__caption'); //подпись
 
 //функции на тоггл (для всех), попробуем так
 function togglePopup(popup) {
+  checkFormValidity(formAddCard,validationConfig);  // < -- проверка ошибок
   const shouldOpen = !popup.classList.contains('popup_visible');
   if(shouldOpen) {
     document.addEventListener('keydown', pressEscapeButton)
@@ -109,8 +110,6 @@ const addCardFormSubmitHandler = (e) => {
   formAddCard.reset();
   formAddBtnSubmit.setAttribute('disabled',true);
   formAddBtnSubmit.classList.add(validationConfig.inactiveButtonClass);
-  checkFormValidity(formAddCard,validationConfig); // <--- вот так не работает
-
 }
 //отрисовка начальных карточек
 initialCards.forEach((data) => {
