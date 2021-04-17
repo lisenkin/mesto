@@ -101,7 +101,6 @@ function renderCard(item, template) {
 //для добавления карты
 const addCardFormSubmitHandler = (e) => {
   e.preventDefault()
-
   renderCard({
     name: formAddInput.value,
     link: formAddUrl.value
@@ -110,7 +109,8 @@ const addCardFormSubmitHandler = (e) => {
   formAddCard.reset();
   formAddBtnSubmit.setAttribute('disabled',true);
   formAddBtnSubmit.classList.add(validationConfig.inactiveButtonClass);
-  
+  checkFormValidity(formAddCard,validationConfig); // <--- вот так не работает
+
 }
 //отрисовка начальных карточек
 initialCards.forEach((data) => {
