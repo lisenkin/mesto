@@ -38,7 +38,6 @@ const popupCaption = document.querySelector('.popup__caption'); //подпись
 
 //функции на тоггл (для всех), попробуем так
 function togglePopup(popup) {
-  checkFormValidity(formAddCard,validationConfig);  // < -- проверка ошибок
   const shouldOpen = !popup.classList.contains('popup_visible');
   if(shouldOpen) {
     document.addEventListener('keydown', pressEscapeButton)
@@ -55,7 +54,7 @@ function togglePopup(popup) {
 //сохранить из эдит попап
 function openEditProfileForm(event) {
   event.preventDefault();
-  checkFormValidity(formAddCard,validationConfig);
+  checkFormValidity(formEditProfile,validationConfig);
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
   document.addEventListener('keydown', pressEscapeButton);
@@ -69,7 +68,6 @@ function editProfileFormSubmitHandler(evt) {
   profileStatus.textContent = jobInput.value;
   togglePopup(popupEdit);
   document.addEventListener('keydown', pressEscapeButton);
-  formEditProfile.reset();
 }
 
 

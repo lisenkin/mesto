@@ -5,7 +5,7 @@ const validationConfig = {
   submitButtonSelector: '.popup__button-submit',
   inactiveButtonClass: 'popup__button-submit_invalid',
   inputErrorClass: 'popup__input_invalid',
-  errorClass: 'popup__error'
+  errorClass: 'popup__error_active'
 };
 
 
@@ -21,10 +21,11 @@ const showError = (formElement,inputElement,errorMessage,validationConfig) => {
 //спрятать
 const hideError = (formElement,inputElement,validationConfig) => {
   const formError = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove(validationConfig.inputErrorClass);
   formError.textContent = '';
   //console.log(errorMessage)
   formError.classList.remove(validationConfig.errorClass);//полоска
-  inputElement.classList.remove(validationConfig.inputErrorClass);//span
+  //span
 };
 
 //проверка валидности ввода
@@ -72,7 +73,9 @@ const setEventListeners = (formElement,validationConfig) => {
   const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
   //console.log(inputList)
   const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
-  deactivateButton(buttonElement,validationConfig.inactiveButtonClass);
+  
+   // сделаем чтобы проверялось до ввода
+   toggleBtnState(inputList, buttonElement,validationConfig);
   // для каждого инпута чек на валидность и дерганье кнопки
     inputList.forEach(inputElement => {
         inputElement.addEventListener("input", (event) => {
@@ -85,8 +88,6 @@ const setEventListeners = (formElement,validationConfig) => {
           }
         });
     });
-    // сделаем чтобы проверялось до ввода
-    toggleBtnState(inputList, buttonElement,validationConfig);
   };
 
 
