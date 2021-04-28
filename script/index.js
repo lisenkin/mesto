@@ -97,11 +97,11 @@ function renderCard(data, wrap) {
 };
 
 //откроем большую картинку при клике на попап
-function handleCardClick(card) {
+function handleCardClick(cardName,cardLink) {
     togglePopup(popupImg);
-    fullPopupImage.src = card.link;
-    fullPopupImage.alt = card.name;
-    popupCaption.textContent = card.name;
+    fullPopupImage.src = cardLink;
+    fullPopupImage.alt = cardName;
+    popupCaption.textContent = cardName;
 
 }
 

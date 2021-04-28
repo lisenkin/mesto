@@ -18,7 +18,7 @@ _showError = (inputElement) => {
   const formError = this._form.querySelector(`.${inputElement.id}-error`);
   inputElement.classList.add(this._config.inputErrorClass); // полоска
   formError.textContent = inputElement.validationMessage;
-  console.log('blabla')
+
   formError.classList.add(this._config.errorClass);//span
 }
 
@@ -33,7 +33,7 @@ _showError = (inputElement) => {
    //проверка валидности ввода
   _checkInputValidity = (inputElement) => {
     // если не валидно включаем, если валидно убираем
-    if (!this._hasInvalidInput) {
+    if (!inputElement.validity.valid) {
       this._showError(inputElement,this._config)
     } else {
       this._hideError(inputElement)
