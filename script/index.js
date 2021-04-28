@@ -1,3 +1,17 @@
+import Card from './Card.js';
+import FormValidator from './FormValidator.js';
+import {initialCards} from './initial-cards.js';
+
+const config = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button-submit',
+  inactiveButtonClass: 'popup__button-submit_invalid',
+  inputErrorClass: 'popup__input_invalid',
+  errorClass: 'popup__error_active'
+};
+
+
 //все переменные про попап
 const popup = document.querySelector('.popup');
 const popupEdit = document.querySelector('.popup-edit-card'); //edit
@@ -36,6 +50,11 @@ const formAddBtnSubmit = formAddCard.querySelector('.popup__button-submit');
 const fullPopupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption'); //подпись
 
+const addCardValidator = new FormValidator(config,formAddCard);
+const editProfileValidator = new FormValidator(config,formEditCard);
+
+addCardValidator.enableValidation();
+editProfileValidator.enableValidation();
 
 //функции на тоггл (для всех), попробуем так
 function togglePopup(popup) {
@@ -57,7 +76,8 @@ function openEditProfileForm(event) {
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
   document.addEventListener('keydown', pressEscapeButton);
-  checkFormValidity(formEditCard,validationConfig);
+  editProfileValidator.checkFormValidity();
+  //checkFormValidity(formEditCard,validationConfig);
   togglePopup(popupEdit);
 
 }
@@ -70,34 +90,20 @@ function editProfileFormSubmitHandler(evt) {
   document.addEventListener('keydown', pressEscapeButton);
 }
 
-
-// функция cоздаем карточку и пишем все.
-function createCardPlace(item, template) {
-  const cardTemplate = document.querySelector('#card-template').content.querySelector('.places__item');
-  const placeItem = cardTemplate.cloneNode(true);
-  const placePhoto = placeItem.querySelector('.place__photo');
-  const placeTitle = placeItem.querySelector('.place__text');
-  const placeBtnLike = placeItem.querySelector('.place__like');
-  const placeButtonDel = placeItem.querySelector('.place__button-remove');
-  placeTitle.textContent = item.name;
-  placePhoto.src = item.link;
-  placePhoto.alt = item.name;
-  //если выносить в отдельные функции, то с const они не работают
-  placeButtonDel.addEventListener('click', () => placeItem.remove());
-  placeBtnLike.addEventListener('click', () => placeBtnLike.classList.toggle('places__like_active'));
-  placePhoto.addEventListener('click', function () {
-    fullPopupImage.src = placePhoto.src;
-    fullPopupImage.alt = item.name;
-    popupCaption.textContent = item.name;
-    togglePopup(popupImg);
-  });
-  return placeItem
-}
 //функция отрисовки карточек по дате, в контейнер (контейнер в самбите)
-function renderCard(item, template) {
-  template.prepend(createCardPlace(item, template));
+function renderCard(data, wrap) {
+  const card = new Card(data,'#card-template',handleCardClick)
+  wrap.prepend(card.generateCard());
 };
 
+//откроем большую картинку при клике на попап
+function handleCardClick(card) {
+    togglePopup(popupImg);
+    fullPopupImage.src = card.link;
+    fullPopupImage.alt = card.name;
+    popupCaption.textContent = card.name;
+
+}
 
 //для добавления карты
 const addCardFormSubmitHandler = (e) => {
@@ -107,7 +113,6 @@ const addCardFormSubmitHandler = (e) => {
     link: formAddUrl.value
   }, placesList);
   formAddCard.reset();
-  checkFormValidity(formAddCard,validationConfig);
   togglePopup(popupAdd);
   formAddBtnSubmit.setAttribute('disabled',true);
   formAddBtnSubmit.classList.add(validationConfig.inactiveButtonClass);
@@ -117,13 +122,13 @@ const addCardFormSubmitHandler = (e) => {
 //пришлось сделать отдельную функцию на открытие с ресетом, что б убрать его из тоггл для всех. надеюсь это логически правильно :)
 function openPopupFormWithReset(element) {
   formAddCard.reset();
-  checkFormValidity(formAddCard,validationConfig);
+  addCardValidator.checkFormValidity();
+  //checkFormValidity(formAddCard,validationConfig);
   togglePopup(element);
 }
 
 //отрисовка начальных карточек
 initialCards.forEach((data) => {
-
   renderCard(data, placesList) // <----- сюда контейнер куда вставлять карточки
 });
 

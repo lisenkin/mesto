@@ -1,5 +1,5 @@
 //массив для карточек
-const initialCards = [
+export const initialCards = [
   {
     name: 'карелия',
     link: './images/ruskeala.jpg'
