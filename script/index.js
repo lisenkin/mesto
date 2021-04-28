@@ -1,6 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import {initialCards} from './initial-cards.js';
+import { initialCards } from './initial-cards.js';
 
 const config = {
   formSelector: '.popup__form',
@@ -50,8 +50,8 @@ const formAddBtnSubmit = formAddCard.querySelector('.popup__button-submit');
 const fullPopupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption'); //подпись
 
-const addCardValidator = new FormValidator(config,formAddCard);
-const editProfileValidator = new FormValidator(config,formEditCard);
+const addCardValidator = new FormValidator(config, formAddCard);
+const editProfileValidator = new FormValidator(config, formEditCard);
 
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
@@ -59,7 +59,7 @@ editProfileValidator.enableValidation();
 //функции на тоггл (для всех), попробуем так
 function togglePopup(popup) {
   const shouldOpen = !popup.classList.contains('popup_visible');
-  if(shouldOpen) {
+  if (shouldOpen) {
     document.addEventListener('keydown', pressEscapeButton)
   }
   else {
@@ -92,16 +92,16 @@ function editProfileFormSubmitHandler(evt) {
 
 //функция отрисовки карточек по дате, в контейнер (контейнер в самбите)
 function renderCard(data, wrap) {
-  const card = new Card(data,'#card-template',handleCardClick)
+  const card = new Card(data, '#card-template', handleCardClick)
   wrap.prepend(card.generateCard());
 };
 
 //откроем большую картинку при клике на попап
-function handleCardClick(cardName,cardLink) {
-    togglePopup(popupImg);
-    fullPopupImage.src = cardLink;
-    fullPopupImage.alt = cardName;
-    popupCaption.textContent = cardName;
+function handleCardClick(cardName, cardLink) {
+  togglePopup(popupImg);
+  fullPopupImage.src = cardLink;
+  fullPopupImage.alt = cardName;
+  popupCaption.textContent = cardName;
 
 }
 
@@ -114,7 +114,7 @@ const addCardFormSubmitHandler = (e) => {
   }, placesList);
   formAddCard.reset();
   togglePopup(popupAdd);
-  formAddBtnSubmit.setAttribute('disabled',true);
+  formAddBtnSubmit.setAttribute('disabled', true);
   formAddBtnSubmit.classList.add(validationConfig.inactiveButtonClass);
 }
 
@@ -139,7 +139,7 @@ popups.forEach(popup => {
   popup.addEventListener('click', evt => {
     //const overlay = document.querySelector('.popup') // div общий попапа
     if (evt.target.classList.contains('popup_visible')) { //
-     // console.log('overlay! yay')
+      // console.log('overlay! yay')
       togglePopup(popup)
 
     }
@@ -161,7 +161,7 @@ function pressEscapeButton(evt) {
 //эвенты
 
 //эвент на редактировать
-openPopupBtn.addEventListener('click',openEditProfileForm);
+openPopupBtn.addEventListener('click', openEditProfileForm);
 closePopupBtn.addEventListener('click', () => togglePopup(popupEdit));
 //эвент на добавить
 openPopupBtnAdd.addEventListener('click', () => openPopupFormWithReset(popupAdd)); // <----сделала отдельную функцию на открытие с ресетом

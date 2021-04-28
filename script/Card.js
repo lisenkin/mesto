@@ -32,7 +32,7 @@ export default class Card {
     this._element.querySelector('.place__like').addEventListener("click", (event) => {
       this._likeClickHandler(event);
     });
-    this._element.querySelector(".place__photo").addEventListener("click", () => this._handleCardClick(this._name,this._link));
+    this._element.querySelector(".place__photo").addEventListener("click", () => this._handleCardClick(this._name, this._link));
 
   }
 
