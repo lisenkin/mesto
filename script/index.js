@@ -13,7 +13,6 @@ const config = {
 
 
 //все переменные про попап
-const popup = document.querySelector('.popup');
 const popupEdit = document.querySelector('.popup-edit-card'); //edit
 const popupAdd = document.querySelector('.popup-add-card'); //add
 const popupImg = document.querySelector('.popup-img');  //big image
@@ -32,7 +31,6 @@ const profileStatus = document.querySelector('.profile__status');
 // Находим форму в DOM
 
 const formEditProfile = document.querySelector('.popup__form');
-const formInput = formEditProfile.querySelector('.popup__input');
 const formEditCard = document.querySelector("#popup-form-edit");
 
 //считаем что в форме
@@ -75,7 +73,6 @@ function openEditProfileForm(event) {
   event.preventDefault();
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
-  document.addEventListener('keydown', pressEscapeButton);
   editProfileValidator.checkFormValidity();
   //checkFormValidity(formEditCard,validationConfig);
   togglePopup(popupEdit);
@@ -87,7 +84,7 @@ function editProfileFormSubmitHandler(evt) {
   profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
   togglePopup(popupEdit);
-  document.addEventListener('keydown', pressEscapeButton);
+
 }
 
 //функция отрисовки карточек по дате, в контейнер (контейнер в самбите)
@@ -114,8 +111,9 @@ const addCardFormSubmitHandler = (e) => {
   }, placesList);
   formAddCard.reset();
   togglePopup(popupAdd);
-  formAddBtnSubmit.setAttribute('disabled', true);
-  formAddBtnSubmit.classList.add(validationConfig.inactiveButtonClass);
+  //formAddBtnSubmit.setAttribute('disabled', true);
+  //formAddBtnSubmit.classList.add(validationConfig.inactiveButtonClass);
+  addCardValidator.checkFormValidity(this.config._inactiveButtonClass);
 }
 
 
@@ -150,8 +148,8 @@ popups.forEach(popup => {
 
 
 function pressEscapeButton(evt) {
-  const popup = document.querySelector('.popup_visible')
   if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_visible')
     togglePopup(popup)
   };
 }

@@ -2,6 +2,8 @@ export default class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form
+    this._buttonElement = this._form.querySelector( this._config.submitButtonSelector);
+    this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
   }
 
   enableValidation = () => {
@@ -34,7 +36,7 @@ export default class FormValidator {
   _checkInputValidity = (inputElement) => {
     // если не валидно включаем, если валидно убираем
     if (!inputElement.validity.valid) {
-      this._showError(inputElement, this._config)
+      this._showError(inputElement)
     } else {
       this._hideError(inputElement)
     }
@@ -47,23 +49,23 @@ export default class FormValidator {
     });
   }
   // Фунция проверки состояния кнопки форм
-  _deactivateButton = (buttonElement) => {
-    buttonElement.classList.add(this._config.inactiveButtonClass);
-    buttonElement.disabled = true;
+  _deactivateButton = () => {
+    this._buttonElement.classList.add(this._config.inactiveButtonClass);
+    this._buttonElement.disabled = true;
   }
 
-  _activateButton = (buttonElement) => {
-    buttonElement.classList.remove(this._config.inactiveButtonClass);
-    buttonElement.disabled = false;
+  _activateButton = () => {
+    this._buttonElement.classList.remove(this._config.inactiveButtonClass);
+    this._buttonElement.disabled = false;
   }
-  _toggleBtnState = (inputList, buttonElement) => {
-    if (this._hasInvalidInput(inputList)) { // проверка та
-      this._deactivateButton(buttonElement)
+  _toggleBtnState = () => {
+    if (this._hasInvalidInput(this._inputList)) { // проверка та
+      this._deactivateButton()
       //buttonElement.setAttribute('disabled','');
       //buttonElement.classList.add("popup__button-submit_invalid");
       //console.log('button ne ok')
     } else {
-      this._activateButton(buttonElement)
+      this._activateButton()
       //buttonElement.removeAttribute('disabled');
       //buttonElement.classList.remove("popup__button-submit_invalid");
       //console.log('button ok')
@@ -72,35 +74,26 @@ export default class FormValidator {
 
   // Функция вешает слушатели событий на поля ввода и кнокпи в указаной форме
   _setEventListeners = () => {
-    const inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector)); //соберем инпуты (все) и кнопки
-    //console.log(inputList)
-    const buttonElement = this._form.querySelector(this._config.submitButtonSelector);
-    this._toggleBtnState(inputList, buttonElement, this._config);
+    this._toggleBtnState();
     // обходим все поля ввода и вешаем на них слушатели
-    inputList.forEach(inputElement => {
+    this._inputList.forEach(inputElement => {
       inputElement.addEventListener("input", (event) => {
-        if (inputElement.value !== '') {
           this._checkInputValidity(inputElement);
-          this._toggleBtnState(inputList, buttonElement);
-        }
-        else {
-          this._hideError(inputElement);
-        }
+          this._toggleBtnState();
+          //убран if
       });
     });
   };
   // Функция дизейбла кнопки
 
-  checkFormValidity(form) {
-    const inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
-    const buttonElement = this._form.querySelector(this._config.submitButtonSelector);
-    inputList.forEach(inputElement => {
+  checkFormValidity() {
+    this._inputList.forEach(inputElement => {
       if (inputElement.value !== '') {
         this._checkInputValidity(inputElement);
       } else {
         this._hideError(inputElement);
       }
-      this._toggleBtnState(inputList, buttonElement);
+      this._toggleBtnState();
     })
   }
 
