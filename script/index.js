@@ -1,6 +1,6 @@
 import Card from './Card.js';
 import FormValidator from './FormValidator.js';
-import {initialCards} from './initial-cards.js';
+import { initialCards } from './initial-cards.js';
 
 const config = {
   formSelector: '.popup__form',
@@ -13,7 +13,6 @@ const config = {
 
 
 //все переменные про попап
-const popup = document.querySelector('.popup');
 const popupEdit = document.querySelector('.popup-edit-card'); //edit
 const popupAdd = document.querySelector('.popup-add-card'); //add
 const popupImg = document.querySelector('.popup-img');  //big image
@@ -32,7 +31,6 @@ const profileStatus = document.querySelector('.profile__status');
 // Находим форму в DOM
 
 const formEditProfile = document.querySelector('.popup__form');
-const formInput = formEditProfile.querySelector('.popup__input');
 const formEditCard = document.querySelector("#popup-form-edit");
 
 //считаем что в форме
@@ -50,8 +48,8 @@ const formAddBtnSubmit = formAddCard.querySelector('.popup__button-submit');
 const fullPopupImage = document.querySelector('.popup__image');
 const popupCaption = document.querySelector('.popup__caption'); //подпись
 
-const addCardValidator = new FormValidator(config,formAddCard);
-const editProfileValidator = new FormValidator(config,formEditCard);
+const addCardValidator = new FormValidator(config, formAddCard);
+const editProfileValidator = new FormValidator(config, formEditCard);
 
 addCardValidator.enableValidation();
 editProfileValidator.enableValidation();
@@ -59,7 +57,7 @@ editProfileValidator.enableValidation();
 //функции на тоггл (для всех), попробуем так
 function togglePopup(popup) {
   const shouldOpen = !popup.classList.contains('popup_visible');
-  if(shouldOpen) {
+  if (shouldOpen) {
     document.addEventListener('keydown', pressEscapeButton)
   }
   else {
@@ -75,7 +73,6 @@ function openEditProfileForm(event) {
   event.preventDefault();
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
-  document.addEventListener('keydown', pressEscapeButton);
   editProfileValidator.checkFormValidity();
   //checkFormValidity(formEditCard,validationConfig);
   togglePopup(popupEdit);
@@ -87,21 +84,21 @@ function editProfileFormSubmitHandler(evt) {
   profileName.textContent = nameInput.value;
   profileStatus.textContent = jobInput.value;
   togglePopup(popupEdit);
-  document.addEventListener('keydown', pressEscapeButton);
+
 }
 
 //функция отрисовки карточек по дате, в контейнер (контейнер в самбите)
 function renderCard(data, wrap) {
-  const card = new Card(data,'#card-template',handleCardClick)
+  const card = new Card(data, '#card-template', handleCardClick)
   wrap.prepend(card.generateCard());
 };
 
 //откроем большую картинку при клике на попап
-function handleCardClick(cardName,cardLink) {
-    togglePopup(popupImg);
-    fullPopupImage.src = cardLink;
-    fullPopupImage.alt = cardName;
-    popupCaption.textContent = cardName;
+function handleCardClick(cardName, cardLink) {
+  togglePopup(popupImg);
+  fullPopupImage.src = cardLink;
+  fullPopupImage.alt = cardName;
+  popupCaption.textContent = cardName;
 
 }
 
@@ -114,8 +111,9 @@ const addCardFormSubmitHandler = (e) => {
   }, placesList);
   formAddCard.reset();
   togglePopup(popupAdd);
-  formAddBtnSubmit.setAttribute('disabled',true);
-  formAddBtnSubmit.classList.add(validationConfig.inactiveButtonClass);
+  //formAddBtnSubmit.setAttribute('disabled', true);
+  //formAddBtnSubmit.classList.add(validationConfig.inactiveButtonClass);
+  addCardValidator.checkFormValidity(this.config._inactiveButtonClass);
 }
 
 
@@ -139,7 +137,7 @@ popups.forEach(popup => {
   popup.addEventListener('click', evt => {
     //const overlay = document.querySelector('.popup') // div общий попапа
     if (evt.target.classList.contains('popup_visible')) { //
-     // console.log('overlay! yay')
+      // console.log('overlay! yay')
       togglePopup(popup)
 
     }
@@ -150,8 +148,8 @@ popups.forEach(popup => {
 
 
 function pressEscapeButton(evt) {
-  const popup = document.querySelector('.popup_visible')
   if (evt.key === 'Escape') {
+    const popup = document.querySelector('.popup_visible')
     togglePopup(popup)
   };
 }
@@ -161,7 +159,7 @@ function pressEscapeButton(evt) {
 //эвенты
 
 //эвент на редактировать
-openPopupBtn.addEventListener('click',openEditProfileForm);
+openPopupBtn.addEventListener('click', openEditProfileForm);
 closePopupBtn.addEventListener('click', () => togglePopup(popupEdit));
 //эвент на добавить
 openPopupBtnAdd.addEventListener('click', () => openPopupFormWithReset(popupAdd)); // <----сделала отдельную функцию на открытие с ресетом
