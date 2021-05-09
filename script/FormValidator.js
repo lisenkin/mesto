@@ -2,7 +2,7 @@ export default class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form
-    this._buttonElement = this._form.querySelector( this._config.submitButtonSelector);
+    this._buttonElement = this._form.querySelector(this._config.submitButtonSelector);
     this._inputList = Array.from(this._form.querySelectorAll(this._config.inputSelector));
   }
 
@@ -78,9 +78,9 @@ export default class FormValidator {
     // обходим все поля ввода и вешаем на них слушатели
     this._inputList.forEach(inputElement => {
       inputElement.addEventListener("input", (event) => {
-          this._checkInputValidity(inputElement);
-          this._toggleBtnState();
-          //убран if
+        this._checkInputValidity(inputElement);
+        this._toggleBtnState();
+        //убран if
       });
     });
   };

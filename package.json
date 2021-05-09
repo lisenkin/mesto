@@ -1,0 +1,23 @@
+{
+  "name": "mesto",
+  "version": "0.0.1",
+  "description": "praktikum sprint 8",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lisenkin/mesto.git"
+  },
+  "author": "Masha Zavalina",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lisenkin/mesto/issues"
+  },
+  "homepage": "https://github.com/lisenkin/mesto#readme",
+  "devDependencies": {
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0"
+  }
+}
