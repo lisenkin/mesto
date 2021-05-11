@@ -1,14 +1,15 @@
+import Popup from './Popup.js'
 export default class Card {
-  constructor({ name, link }, cardSelector, handleCardClick) {
-    this._link = link;
-    this._name = name;
-    this._cardSelector = cardSelector;
+  constructor(data, selector, handleCardClick) {
+    this._name = data.name;
+    this._link = data.link;
+    this._selector = selector;
     this._handleCardClick = handleCardClick;
   };
 
-  _getTemplate() {
-    const placeItem = document.querySelector(this._cardSelector).content.querySelector(".places__item").cloneNode(true);
-
+  //тут селектор из темплейта li.
+  getTemplate() {
+    const placeItem = document.querySelector(this._selector).content.querySelector(".places__item").cloneNode(true);
     return placeItem;
   }
 
@@ -41,7 +42,7 @@ export default class Card {
 
   generateCard() {
 
-    this._element = this._getTemplate();
+    this._element = this.getTemplate();
     this._setEventListeners();
 
     this._element.querySelector('.place__text').textContent = this._name;
