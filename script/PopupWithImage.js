@@ -1,18 +1,24 @@
-import Popup from './Popup.js';
+import Popup from "./Popup.js";
 
 export default class PopupWithImage extends Popup {
-  constructor({ name, link }, popupSelector) {
-    super(popupSelector);
-    this._popupFullImg = document.querySelector('.popup__image');
-    this._popupCaption = document.querySelector('.popup__caption');
-    this._name = name;
-    this._link = link;
-  }
+    constructor(selector) {
+        super(selector);
+        this._image = this._selector.querySelector('.popup__image'); //большая картинка
+        this._caption = this._selector.querySelector('.popup__caption'); // и маленькая подпись
+    }
 
-  //  унаследует и дополним слегка
-  open() {
-    this._popupFullImg.src = this._link;
-    this._popupCaption.textContent = this._name;
-    super.open();
-  }
+
+    // в опен добавляем вставку картинки, и подписи к ней
+    open(name, link) {
+        super.open();
+        this._image.src = link;
+        this._image.alt = name;
+        this._caption.textContent = name;
+        /*fullPopupImage.src = cardLink;
+        fullPopupImage.alt = cardName;
+        popupCaption.textContent = cardName; */ // кусочек на память из старого index.js  про логику
+    }
+
 }
+
+

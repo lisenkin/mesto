@@ -1,20 +1,22 @@
 export default class UserInfo {
-  constructor({ titleContainer, subTitleContainer }) {
-    this._titleContainer = titleContainer;
-    this._subTitleContainer = subTitleContainer;
+  constructor(data) {
+  this._data = data;  //принимает имя и статус(работку)
   }
 
+  // return обьект с данными. подставляет в форму при открытии
   getUserInfo() {
-    this._profileValues = {};
-    this._profileValues.title = this._titleContainer.textContent;
-    this._profileValues.subtitle = this._subTitleContainer.textContent;
-    return this._profileValues;
+  return {
+  //  nameInput.value = profileName.textContent;
+  //jobInput.value = profileStatus.textContent;
+      name: this._data.name.textContent,
+      job: this._data.job.textContent
   }
-
-  setUserInfo(formData) {
-    this._titleContainer.textContent = formData['popup-input-name'];
-    this._subTitleContainer.textContent = formData['popup-input-status'];
+  }
+// вставляет новые данные на страницу
+  setUserInfo(data) {
+  //profileName.textContent = nameInput.value;  временно на память из старого index.js
+  //profileStatus.textContent = jobInput.value;
+  this._data.name.textContent = data.name;
+  this._data.job.textContent = data.job;
   }
 }
-
-
