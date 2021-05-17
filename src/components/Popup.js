@@ -18,7 +18,7 @@ export default class Popup {
             this.close();
         }
     }
-//закрывашка по оверлэю, вааау
+//закрывашка по оверлэю, вааау  (и кнопке)
     _closePopupOverlay(event) {
         if(event.target.classList.contains('popup__close-button') || event.target.classList.contains('popup')) {
             this.close();
@@ -28,6 +28,7 @@ export default class Popup {
 
     setEventListeners() {
         this._popup.addEventListener('click', this._closePopupOverlay.bind(this)); //вместо стрелочной
+      
 
     }
 }

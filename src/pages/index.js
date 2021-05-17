@@ -19,53 +19,20 @@ const config = {
   errorClass: 'popup__error_active'
 };
 
-
-//все переменные про попап которые пока что страшно удалять потому что потому :)
-
-//const popupEditCard = new Popup('.popup-edit-card');
-//const popupFormEditProfile = document.querySelector('.popup-edit-card').querySelector('.popup__form');
-
-
-//const popupAddCard = new Popup('.popup-add-card');
-//const popupFormAddCard = document.querySelector('.popup-add-card').querySelector('.popup__form');
-
-/*const popupEdit = document.querySelector('.popup-edit-card'); //edit
-const popupAdd = document.querySelector('.popup-add-card'); //add
-const popupImg = document.querySelector('.popup-img');  //big image
-*/
-
 //open-close попап
 const openPopupBtn = document.querySelector('.profile__button-edit');
 const openPopupBtnAdd = document.querySelector('.profile__button-add'); //add
 
-//const closePopupBtn = popupEditCard.querySelector('.popup__close-button');
-//const closePopupBtnAdd = popupAddCard.querySelector('.popup__close-button');//add
-//const closePopupBtnImg = popupImg.querySelector('.popup__close-button');//big image
 
 //со страницы
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
-
-// Находим форму в DOM
-
-//const formEditProfile = document.querySelector('.popup__form');
 const formEditCard = document.querySelector("#popup-form-edit");
 
 //считаем что в форме
 const nameInput = document.querySelector('.popup__input_type_name');
-const jobInput = document.querySelector('.popup__input_type_status');
-//const placesList = document.querySelector('.places__list');  //ul куда вставлять
-//найдем форму для добавления карточки
-
+const jobInput = document.querySelector('.popup__input_type_status')
 const formAddCard = document.querySelector('#popup-form-add');
-const formAddInput = formAddCard.querySelector('.popup__input_type_place-name');
-const formAddUrl = formAddCard.querySelector('.popup__input_type_photo');
-//const formAddBtnSubmit = formAddCard.querySelector('.popup__button-submit');
-
-//большая картинка
-//const fullPopupImage = document.querySelector('.popup__image');
-//const popupCaption = document.querySelector('.popup__caption'); //подпись
-
 
 
 //включим валидацию
@@ -86,6 +53,7 @@ function createCard(data) {
   return newCard.generateCard();
 }
 
+
 // отрисовка карточек из изначального массива с помощью класса секшн и кард по темплейту
 const cardsList = new Section({
   data: initialCards,
@@ -101,41 +69,24 @@ cardsList.renderItems();  //отрисовочка
 //карточка юзеринфо
 const userInfo = new UserInfo({ name: profileName, job: profileStatus });
 
-//попап эдит профиль. селектор по классу.
-const popupEditCard = new PopupWithForm({
-  popup: '.popup-edit-card', formHandler: () => {
-  //  userInfo.setUserInfo({ name: nameInput.value, job: jobInput.value });
-  renderer: (item) => {
-    userInfo.setUserInfo(item)
-  }
-    popupEditCard.close();
-  }
-});
+//вынесем сохранения
+const saveChangesProfile = (data) => {
+  userInfo.setUserInfo(data);
+  popupEditCard.close();
+}
+
+const popupEditCard = new PopupWithForm('.popup-edit-card', saveChangesProfile);
+//нашла злую ошибку с отсутсивем атрибутов name в html которая не сохраняла
 
 
+const createPopupAddCard = (data) => {
+  const obj = {name: data.name, link: data.url};
+  const newCard = createCard(obj, '.popup-add-card', popupAddCard.open);
+  cardsList.prependItems(newCard);
+  popupAddCard.close();
+}
 
-const popupAddCard = new PopupWithForm({
-  popup: '.popup-add-card',
-  formHandler: () => {
-      cardsList.prependItems(createCard({  name: formAddInput.value, link: formAddUrl.value }));
-
-      popupAddCard.close();
-  },
-});
-// открыть попап эдд с селетором по классу
-/*const popupAddCard = new PopupWithForm({
-  popup: '.popup-add-card', formHandler: () => {
-   const newCard = new Card(
-
-      { name: formAddInput.value, link: formAddUrl.value },
-
-      '#card-template', fullPopupImage.open.bind(fullPopupImage)) // + большая картинка(галерея)
-
-    cardsList.prependItems(newCard.generateCard());  //добавь в начало препендом
-
-    popupAddCard.close();
-  }
-});*/
+const popupAddCard = new PopupWithForm('.popup-add-card',createPopupAddCard)
 
 
 /* ---                тут теперь все  эвенты ,  но это не точно        -  */
@@ -158,6 +109,7 @@ openPopupBtn.addEventListener('click', (e) => {
   const newUserInfo = userInfo.getUserInfo();
   nameInput.value = newUserInfo.name;
   jobInput.value = newUserInfo.job;
+
 });
 
 // эвент открытия добавления
