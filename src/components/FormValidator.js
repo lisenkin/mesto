@@ -61,14 +61,10 @@ export default class FormValidator {
   _toggleBtnState = () => {
     if (this._hasInvalidInput(this._inputList)) { // проверка та
       this._deactivateButton()
-      //buttonElement.setAttribute('disabled','');
-      //buttonElement.classList.add("popup__button-submit_invalid");
-      //console.log('button ne ok')
+
     } else {
       this._activateButton()
-      //buttonElement.removeAttribute('disabled');
-      //buttonElement.classList.remove("popup__button-submit_invalid");
-      //console.log('button ok')
+
     }
   }
 
@@ -93,8 +89,9 @@ export default class FormValidator {
       } else {
         this._hideError(inputElement);
       }
-      this._toggleBtnState();
+
     })
+    this._toggleBtnState();
   }
 
 

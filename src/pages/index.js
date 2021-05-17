@@ -80,15 +80,17 @@ editProfileValidator.enableValidation();
 const fullPopupImage = new PopupWithImage('.popup-img');
 
 
+//раньше было внутри кардлиста
+function createCard(data) {
+  const newCard = new Card(data, '#card-template', fullPopupImage.open.bind(fullPopupImage))
+  return newCard.generateCard();
+}
 
 // отрисовка карточек из изначального массива с помощью класса секшн и кард по темплейту
-
 const cardsList = new Section({
   data: initialCards,
-  renderer: function (element) {
-
-    const newCard = new Card(element, '#card-template', fullPopupImage.open.bind(fullPopupImage))
-    cardsList.setItems(newCard.generateCard());  // не забыть что тут по id в разметке, что б снова не ковырять полчаса
+  renderer: function (data) {
+    cardsList.setItems(createCard(data));  //вынесла в функцию create
   }
 },
 
@@ -101,18 +103,29 @@ const userInfo = new UserInfo({ name: profileName, job: profileStatus });
 
 //попап эдит профиль. селектор по классу.
 const popupEditCard = new PopupWithForm({
-  selector: '.popup-edit-card', formHandler: () => {
-    userInfo.setUserInfo({ name: nameInput.value, job: jobInput.value });
+  popup: '.popup-edit-card', formHandler: () => {
+  //  userInfo.setUserInfo({ name: nameInput.value, job: jobInput.value });
+  renderer: (item) => {
+    userInfo.setUserInfo(item)
+  }
     popupEditCard.close();
   }
 });
 
 
-// открыть попап эдд с селетором по классу
-const popupAddCard = new PopupWithForm({
-  selector: '.popup-add-card', formHandler: () => {
 
-    const newCard = new Card(
+const popupAddCard = new PopupWithForm({
+  popup: '.popup-add-card',
+  formHandler: () => {
+      cardsList.prependItems(createCard({  name: formAddInput.value, link: formAddUrl.value }));
+
+      popupAddCard.close();
+  },
+});
+// открыть попап эдд с селетором по классу
+/*const popupAddCard = new PopupWithForm({
+  popup: '.popup-add-card', formHandler: () => {
+   const newCard = new Card(
 
       { name: formAddInput.value, link: formAddUrl.value },
 
@@ -122,7 +135,7 @@ const popupAddCard = new PopupWithForm({
 
     popupAddCard.close();
   }
-});
+});*/
 
 
 /* ---                тут теперь все  эвенты ,  но это не точно        -  */
@@ -143,8 +156,6 @@ openPopupBtn.addEventListener('click', (e) => {
   e.preventDefault();
   popupEditCard.open();
   const newUserInfo = userInfo.getUserInfo();
-  //nameInput.value = profileName.textContent;
-  //jobInput.value = profileStatus.textContent;
   nameInput.value = newUserInfo.name;
   jobInput.value = newUserInfo.job;
 });
