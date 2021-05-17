@@ -19,11 +19,8 @@ const config = {
   errorClass: 'popup__error_active'
 };
 
-//open-close попап
 const openPopupBtn = document.querySelector('.profile__button-edit');
 const openPopupBtnAdd = document.querySelector('.profile__button-add'); //add
-
-
 //со страницы
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
@@ -33,6 +30,8 @@ const formEditCard = document.querySelector("#popup-form-edit");
 const nameInput = document.querySelector('.popup__input_type_name');
 const jobInput = document.querySelector('.popup__input_type_status')
 const formAddCard = document.querySelector('#popup-form-add');
+
+
 
 
 //включим валидацию
@@ -76,7 +75,8 @@ const saveChangesProfile = (data) => {
 }
 
 const popupEditCard = new PopupWithForm('.popup-edit-card', saveChangesProfile);
-//нашла злую ошибку с отсутсивем атрибутов name в html которая не сохраняла
+//нашла злую ошибку с отсутсивем атрибутов name в html, почему не  сохранялось
+// c readme сорри, была уверена что перенесла в корень :)
 
 
 const createPopupAddCard = (data) => {
