@@ -19,7 +19,10 @@
   <main class="page__content content">
 
     <section class="page__profile profile">
-      <img src="<%=require('./images/image_avatar.jpg')%>" alt="аватар" class="profile__avatar">
+      <div class="profile__overlay">
+        <img src="<%=require('./images/image_avatar.jpg')%>" alt="аватар" class="profile__avatar">
+      </div>
+
 
       <div class="profile__info">
         <div class="profile__info-textblock">
@@ -41,7 +44,7 @@
     <p class="footer__author">&copy; 2021 Mesto Russia lisenkin</p>
   </footer>
 
-  <!-- попап для редактирования -->
+  <!-- попап для редактирования данных профиля-->
   <div class="popup popup-edit-card">
 
     <div class="popup__content">
@@ -51,7 +54,7 @@
         <input class="popup__input popup__input_type_name" type="text" placeholder="ваше имя"  name="name" id="popup-input-name"
           minlength="2" maxlength="40"  required>
         <span class="popup__error popup-input-name-error"></span>
-        <input class="popup__input popup__input_type_status" type="text"  name="job" placeholder="о себе" id="popup-input-status"
+        <input class="popup__input popup__input_type_status" type="text"  name="about" placeholder="о себе" id="popup-input-status"
           minlength="2" maxlength="200" required>
         <span class="popup__error popup-input-status-error"></span>
         <button class="popup__button-submit" type="submit">Сохранить</button>
@@ -59,8 +62,7 @@
     </div>
   </div>
 
-  <!-- попап для добавления -->
-  <!-- кто забыл убрать полоску красную подмиксованную для отладки тот переписал весь JS  -_- -->
+  <!-- попап для добавления картинки -->
   <div class="popup popup-add-card">
     <div class="popup__content">
       <button aria-label="Закрыть" class="popup__close-button popup__close-button-add" type="button"></button>
@@ -69,13 +71,33 @@
         <input class="popup__input popup__input_type_place-name" type="text" name="name" placeholder="Название"
           id="popup-input-place-name" minlength="2" maxlength="30" required>
         <span class="popup__error popup-input-place-name-error"></span>
-        <input class="popup__input popup__input_type_photo" type="url" name="url" placeholder="Ссылка на картинку"
+        <input class="popup__input popup__input_type_photo" type="url" name="link" placeholder="Ссылка на картинку"
           id="popup-input-url" required>
         <span class="popup__error popup-input-url-error"></span>
         <button class="popup__button-submit" type="submit">Создать</button>
       </form>
     </div>
   </div>
+  <!-- попап изменить аватар -->
+  <section class="popup popup-add-avatar">
+    <div class="popup__content">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="popup__title">Обновить аватар</h2>
+      <form class="popup__form" name="popup-form" id="popup-form-add-avatar">
+        <input class="popup__input popup__input_type_avatar" type="url" placeholder="Ссылка на аватар"
+        name="link" required>
+          <span class="popup__error popup-input-url-error"></span>
+        <button class="popup__button-submit" type="submit">Сохранить</button>
+      </form>
+    </div>
+  </section>
+  <!-- попап точно закрыть? -->
+  <section class="popup popup-remove-card">
+    <div class="popup__content">
+      <button class="popup__close-button" type="button"></button>
+      <h2 class="popup__title">Вы уверены?</h2>
+      <button class="popup__button-remove" type="button">Да</button>
+    </div>
 
   <section class="popup popup_dark popup-img">
     <figure class="popup__figure">
@@ -90,10 +112,13 @@
     <li class="places__item">
       <article class="place">
         <img class="place__photo" alt="Картинка" src="#">
-        <button class="place__button-remove" type="button"></button>
+        <button class="place__button-remove place__button-remove_hidden" type="button"></button>
         <div class="place__textarea">
           <h2 class="place__text"></h2>
-          <button class="place__like" type="button"></button>
+          <div class="place__column-block">
+            <button class="place__like" type="button"></button>
+            <span class="place__score-like">0</span>
+          </div>
         </div>
       </article>
     </li>

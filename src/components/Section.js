@@ -1,12 +1,13 @@
 export default class Section {
-  constructor({data, renderer}, selector) {
-      this._initialArrayCards = data;  // карточки изначальные
+  constructor({renderer}, selector) {
+  // карточки изначальные убрали
       this._renderer = renderer;
       this._selector = document.querySelector(selector);
   }
 
-  renderItems() {
-      this._initialArrayCards.forEach((item) => {
+  renderItems(data) {
+    //теперь рисуем дату
+      data.forEach((item) => {
           this._renderer(item);
       });
   }

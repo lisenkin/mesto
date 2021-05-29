@@ -1,5 +1,5 @@
 //массив для карточек
-
+/*
 import Karelia from './../images/ruskeala.jpg';
 import Sochi from './../images/sochi.jpg';
 import BalticSea from './../images/baltica.jpg';
@@ -34,3 +34,4 @@ export const initialCards = [
     link: KurskayaKosa
   }
 ];
+*/
