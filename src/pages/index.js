@@ -184,7 +184,7 @@ function handleDeleteButton(cardId, cardElement) {
 
 // обработчик кнопки лайка
 function handleLikeButton(card) {
-    if (!evt.target.classList.contains("place__button-like_active")) {
+    if (!evt.target.classList.contains("places__like_active")) {
       addLike(card)
     } else {
       removeLike(card)
