@@ -189,7 +189,7 @@ const toggleLike = (evt, cardId, likesCounter) => {
 
 // точно удалить? с таким трудом добавляли
 function confirmCardRemove(cardId, cardElement) {
-  isLoading(true, removePopup)
+
   api.removeCard(cardId)
     .then(() => {
       // удалить карточку :(
@@ -198,9 +198,7 @@ function confirmCardRemove(cardId, cardElement) {
       popupWithRemove.close();
     })
     .catch(err => console.log(err))
-    .finally(() => {
-      isLoading(false, removePopup)
-    })
+
 }
 
 function isLoading(loading, popup) {
@@ -209,9 +207,6 @@ function isLoading(loading, popup) {
   } else {
     if (popup.classList.contains('popup-add')) {
       popup.querySelector('.popup__button-submit').textContent = 'Создать';
-    }
-    else if (popup.classList.contains('popup-remove')) {
-      popup.querySelector('.popup__button-remove').textContent = 'Да';
     }
     else {
       popup.querySelector('.popup__button-submit').textContent = 'Сохранить';
