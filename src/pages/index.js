@@ -65,7 +65,7 @@ const popupAddCard = new PopupWithForm('.popup-add-card',createPopupAddCard);
 //попап аватар
 const popupWithAvatar =  new PopupWithForm('.popup-add-avatar',addNewAvatar);
 //попап точно закрыть?
-//const popupWithRemove = new PopupWithRemove('.popup-remove-card', confirmCardRemove)
+//const popupWithRemove = new PopupWithRemove('.popup-remove-card',confirmCardRemove)
 
 //карточка юзеринфо
 const userInfo = new UserInfo('.profile__name','.profile__status','.profile__avatar');
@@ -183,29 +183,12 @@ function handleDeleteButton(cardId, cardElement) {
 
 
 // обработчик кнопки лайка
-function handleLikeButton(likeButton, cardId, likesAmount, isLiked) {
-  //если карточка уже лайкнута
-  if (isLiked) {
-    likeButton.classList.toggle("place__like_active");
-    // отправляем запрос снятия лайка на сервер
-    api.removeLike(cardId)
-      .then(data => {
-        // ставим обновленное количество лайков из пришедшей даты
-        likesAmount.textContent = data.likes.length;
-
-      })
-      .catch(err => console.log(err))
-  // если лайка еще нет
-  } else {
-
-    likeButton.classList.toggle("place__like_active");
-    api.addLike(cardId)
-      .then(data => {
-        // ставим обновленное количество лайков из пришедшей даты
-        likesAmount.textContent = data.likes.length;
-      })
-      .catch(err => console.log(err))
-  }
+function handleLikeButton(card) {
+    if (!evt.target.classList.contains("place__button-like_active")) {
+      addLike(card)
+    } else {
+      removeLike(card)
+    }
 }
 
 
@@ -219,7 +202,7 @@ function confirmCardRemove(cardId, cardElement) {
       // удалить карточку из разметки
       cardElement.remove()
       // закрыть попап подтверждения
-    // popupWithRemove.close();
+    popupWithRemove.close();
     })
     .catch(err => console.log(err))
   //  .finally(() => {
