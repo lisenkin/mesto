@@ -211,7 +211,7 @@ function isLoading(loading, popup) {
       popup.querySelector('.popup__button-submit').textContent = 'Создать';
     }
     else if (popup.classList.contains('popup-remove')) {
-      popup.querySelector('.popup__button-submit').textContent = 'Да';
+      popup.querySelector('.popup__button-remove').textContent = 'Да';
     }
     else {
       popup.querySelector('.popup__button-submit').textContent = 'Сохранить';
