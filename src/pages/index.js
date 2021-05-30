@@ -10,7 +10,7 @@ import PopupWithRemove from '../components/PopupWithRemove.js';
 
 import {
   config, openPopupBtn, openPopupBtnAdd, formEditCard, nameInput, jobInput,
-  formAddCard, EditAvatarButton, formEditAvatar
+  formAddCard, EditAvatarButton, formEditAvatar,editProfilePopup,addCardPopup,removePopup,avatarPopup
 } from '../utils/constants.js'
 import './index.css';
 
@@ -74,11 +74,16 @@ function EditProfileSubmitHandler(inputValues) {
       popupEditCard.close();
     })
     .catch(err => console.log(err))
+    .finally(() => {
+      // остановить загрузку
+      isLoading(false, editProfilePopup);
+    })
 }
 
 
 // обработчик формы создания карточек
 function createPopupAddCard(inputValues) {
+  isLoading(true, addCardPopup)
   //console.log(inputValues);
   // карточку на сервер POST API
   api.addCard(inputValues)
@@ -98,6 +103,10 @@ function createPopupAddCard(inputValues) {
       popupAddCard.close();
     })
     .catch(err => console.log(err))
+    .finally(() => {
+      // остановить загрузку
+      isLoading(false, addCardPopup);
+    })
 
 }
 
@@ -125,6 +134,7 @@ function handleCardClick(name, link) {
 
 // обработчик аватарки
 function addNewAvatar(inputValue) {
+  isLoading(true, avatarPopup)
   // отправить запрос
   api.editUserAvatar(inputValue.link)
     .then(() => {
@@ -132,6 +142,8 @@ function addNewAvatar(inputValue) {
       userInfo.setUserAvatar(inputValue.link);
       // закрыть
       popupWithAvatar.close()
+      // остановить
+      isLoading(false, avatarPopup);
 
     })
     .catch(err => console.log(err))
@@ -177,7 +189,7 @@ const toggleLike = (evt, cardId, likesCounter) => {
 
 // точно удалить? с таким трудом добавляли
 function confirmCardRemove(cardId, cardElement) {
-
+  isLoading(true, removePopup)
   api.removeCard(cardId)
     .then(() => {
       // удалить карточку :(
@@ -186,10 +198,26 @@ function confirmCardRemove(cardId, cardElement) {
       popupWithRemove.close();
     })
     .catch(err => console.log(err))
-
+    .finally(() => {
+      isLoading(false, removePopup)
+    })
 }
 
-
+function isLoading(loading, popup) {
+  if (loading) {
+    popup.querySelector('.popup__button-submit').textContent = 'Сохранение...';
+  } else {
+    if (popup.classList.contains('popup-add')) {
+      popup.querySelector('.popup__button-submit').textContent = 'Создать';
+    }
+    else if (popup.classList.contains('popup-remove')) {
+      popup.querySelector('.popup__button-submit').textContent = 'Да';
+    }
+    else {
+      popup.querySelector('.popup__button-submit').textContent = 'Сохранить';
+    }
+  }
+}
 
 
 /* ---                тут теперь все  эвенты ,  но это не точно        -  */

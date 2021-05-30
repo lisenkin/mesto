@@ -22,3 +22,10 @@ export const jobInput = document.querySelector('.popup__input_type_status')
 export const formAddCard = document.querySelector('#popup-form-add');
 export const EditAvatarButton = document.querySelector('.profile__overlay');
 export const formEditAvatar = document.querySelector("#popup-form-add-avatar");
+
+
+// попапы
+export const editProfilePopup = document.querySelector('.popup-edit-card');
+export const addCardPopup = document.querySelector('.popup-add-card');
+export const removePopup = document.querySelector('.popup-remove-card');
+export const avatarPopup = document.querySelector('.popup-add-avatar');
