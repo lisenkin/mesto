@@ -20,7 +20,7 @@ export const formEditCard = document.querySelector("#popup-form-edit"); //edit
 export const nameInput = document.querySelector('.popup__input_type_name');
 export const jobInput = document.querySelector('.popup__input_type_status')
 export const formAddCard = document.querySelector('#popup-form-add');
-export const EditAvatarButton = document.querySelector('.profile__overlay');
+export const editAvatarButton = document.querySelector('.profile__overlay');
 export const formEditAvatar = document.querySelector("#popup-form-add-avatar");
 
 

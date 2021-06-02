@@ -31,6 +31,8 @@ export default class Card {
     this._title.textContent = this._name;
     this._image.alt = this._name;
     this._image.src = this._link;
+
+
     //показать корзину если ты текущий юзер
     if (this._currentUser === this._owner._id) {
       this._deleteButton.classList.remove('place__button-remove_hidden');
@@ -39,8 +41,16 @@ export default class Card {
     else {
       this._deleteButton.classList.add('place__button-remove_hidden');
     }
+
+    if (this.isLiked()) {
+      // сделать иконку активной
+      this._likeButton.classList.add('places__like_active'); // тогда черным
+    }
+
     return this._element;
   }
+
+
 
   //тут селектор из темплейта li.  добываем по шаблону из дом
   getTemplate() {
@@ -59,6 +69,21 @@ export default class Card {
     });
     this._image.addEventListener("click", () => this._handleCardClick(this._name, this._link));
 
+  }
+
+   // есть ли лайк
+  isLiked() {
+    let hasLike = false
+    // проходимся по каждому лайкнувшему карточку
+    this._likes.forEach(likedUser => {
+      let valuesArr = Object.values(likedUser)
+      // если содержит АйДи пользователя
+      if (valuesArr.includes(this._currentUser)) {
+        // значит карточка уже лайканая
+        hasLike = true
+      }
+    })
+    return hasLike;
   }
 
 }

@@ -12,8 +12,8 @@ export default class PopupWithRemove extends Popup {
 
     this.form.addEventListener('submit', evt => {
       evt.preventDefault();
-
-      this._confirmHandler(this.cardId, this.cardElement)
+      //вызвать тут обычное сохранение
+      this._handleSubmit(this.cardId, this.cardElement)
     })
   }
 

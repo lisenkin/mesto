@@ -1,8 +1,18 @@
+
+
 export default class Api {
 
   constructor({ baseUrl, token }) {
     this._baseUrl = baseUrl;
     this._token = token;
+  }
+
+// приватный метод для ошибки что б не было дублирования :)
+   _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   // метод загрузки карточек с сервера
@@ -12,10 +22,7 @@ export default class Api {
         authorization: this._token
       }
     })
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
   //загрузка юзеринфо
   getUserInfo() {
@@ -24,10 +31,7 @@ export default class Api {
         authorization: this._token
       }
     })
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
   //изменение юзеринфо передаем name и job(about)
   editUserInfo({ name: newName, about: newAbout }) {
@@ -42,10 +46,7 @@ export default class Api {
         about: newAbout
       })
     })
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
   //добавить карточку  data (name link)  POST
   addCard({ name: newCardName, link: newCardLink }) {
@@ -60,10 +61,7 @@ export default class Api {
         link: newCardLink
       })
     })
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 
   removeCard(cardId) {
@@ -74,10 +72,7 @@ export default class Api {
         'Content-Type': 'application/json'
       },
     })
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 
   addLike(cardId) {
@@ -88,10 +83,7 @@ export default class Api {
         'Content-Type': 'application/json'
       },
     })
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 
   removeLike(cardId) {
@@ -102,10 +94,7 @@ export default class Api {
         'Content-Type': 'application/json'
       },
     })
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
   // avatar = data
   editUserAvatar(avatar) {
@@ -119,9 +108,6 @@ export default class Api {
         avatar: avatar,
       })
     })
-      .then(res => {
-        if (res.ok) return res.json();
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+    .then(this._checkResponse)
   }
 }

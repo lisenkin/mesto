@@ -10,7 +10,7 @@ import PopupWithRemove from '../components/PopupWithRemove.js';
 
 import {
   config, openPopupBtn, openPopupBtnAdd, formEditCard, nameInput, jobInput,
-  formAddCard, EditAvatarButton, formEditAvatar,editProfilePopup,addCardPopup,removePopup,avatarPopup
+  formAddCard, editAvatarButton, formEditAvatar,editProfilePopup,addCardPopup,removePopup,avatarPopup
 } from '../utils/constants.js'
 import './index.css';
 
@@ -160,7 +160,7 @@ function handleDeleteButton(cardId, cardElement) {
     // удалить карточку из разметки ДОМ
     cardElement.remove() */
   // // вызвать функу удалить карту
-  confirmCardRemove(cardId, cardElement);
+  //confirmCardRemove(cardId, cardElement);
 
 }
 
@@ -189,7 +189,7 @@ const toggleLike = (evt, cardId, likesCounter) => {
 
 // точно удалить? с таким трудом добавляли
 function confirmCardRemove(cardId, cardElement) {
-
+ isLoading(true,  removePopup)
   api.removeCard(cardId)
     .then(() => {
       // удалить карточку :(
@@ -198,7 +198,9 @@ function confirmCardRemove(cardId, cardElement) {
       popupWithRemove.close();
     })
     .catch(err => console.log(err))
-
+    .finally(() => {
+    isLoading(false, removePopup)
+    })
 }
 
 function isLoading(loading, popup) {
@@ -208,6 +210,9 @@ function isLoading(loading, popup) {
     if (popup.classList.contains('popup-add')) {
       popup.querySelector('.popup__button-submit').textContent = 'Создать';
     }
+  //  else if (popup.classList.contains('popup-remove')) {
+   //   popup.querySelector('.popup__button-submit').textContent = 'Да';
+   // }
     else {
       popup.querySelector('.popup__button-submit').textContent = 'Сохранить';
     }
@@ -230,7 +235,7 @@ openPopupBtn.addEventListener('click', (e) => {
 });
 
 // слушатель аватарки
-EditAvatarButton.addEventListener('click', (e) => popupWithAvatar.open())
+editAvatarButton.addEventListener('click', (e) => popupWithAvatar.open())
 
 
 
